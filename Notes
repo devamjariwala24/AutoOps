@@ -1,0 +1,42 @@
+Hibernate is an ORM tool used to create database tables from java classes.
+
+In Java Persistence API (JPA), both @Entity and @MappedSuperclass are annotations used to define classes that are part
+of the object-relational mapping (ORM). However, they serve different purposes and have distinct characteristics.
+
+
+@Entity
+Definition:
+
+@Entity is used to define a class whose instances are entities managed by the JPA. Each @Entity annotated class
+corresponds to a table in the database.
+Table Mapping:
+
+Each @Entity class is mapped to a database table. For example, if you have an entity class named User, JPA will create a
+table named User (or the name you specify) in the database.
+Instance Lifecycle:
+
+Instances of @Entity classes are managed by the EntityManager, which means they can be persisted, updated, and removed
+through JPA operations.
+Inheritance:
+
+@Entity classes can inherit from other classes, but only the root class needs the @Entity annotation.
+Subclasses can use @Inheritance to define inheritance strategies (e.g., SINGLE_TABLE, TABLE_PER_CLASS, JOINED).
+
+
+@MappedSuperclass
+Definition:
+
+@MappedSuperclass is used to define a class whose properties are inherited by subclasses but is not itself an entity.
+Classes annotated with @MappedSuperclass do not have a corresponding table in the database.
+Table Mapping:
+
+A @MappedSuperclass does not correspond to a database table. Instead, its properties are mapped to the tables of its
+@Entity subclasses.
+Instance Lifecycle:
+
+Instances of @MappedSuperclass classes are not managed by the EntityManager directly.
+Instead, the subclasses that extend the @MappedSuperclass are the managed entities.
+Inheritance:
+
+Properties and methods of a @MappedSuperclass are inherited by the entity subclasses. This allows for sharing common
+attributes and methods among multiple entity classes without repeating the code.
