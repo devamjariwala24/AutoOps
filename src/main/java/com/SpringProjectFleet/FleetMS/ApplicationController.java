@@ -20,4 +20,9 @@ public class ApplicationController {
     public String Content(){
         return "index2";
     }
+
+    @GetMapping("/hr")
+    public String hr(){
+        return "/hr/index";
+    }
 }
