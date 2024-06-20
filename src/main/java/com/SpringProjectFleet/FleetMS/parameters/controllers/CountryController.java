@@ -16,9 +16,8 @@ public class CountryController {
     private CountryService countryService;
 
     @GetMapping("/countries")
-    @ResponseBody
     public String getAll(){
         List<Country> countries = countryService.getALl();
-        return "/parameters/countryList";
+       return "parameters/countryList";
     }
 }
