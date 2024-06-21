@@ -5,10 +5,170 @@
 <head>
     <meta charset="UTF-8">
     <title>Settings Module</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .panel {
+            border: none;
+            box-shadow: none;
+        }
+
+        .card {
+            width: 100%;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-body > * {
+            margin-bottom: 15px;
+        }
+
+        .panel-body {
+            padding: 10px;
+        }
+
+        .col-lg-4 {
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            font-size: 1.25rem; /* Increase font size */
+            padding: 10px 20px; /* Increase padding */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004494;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Welcome to Settings module</h1>
+    <div class="row">
+        <div class="col-lg-4">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title"><b>Countries</b></h3>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="/countries" class="btn btn-primary">Manage Countries</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-4">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title"><b>Modules</b></h3>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Manage Modules</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-4">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title"><b>States</b></h3>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Manage States</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title"><b>Locations</b></h3>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Manage Locations</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-4">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title"><b>Contacts</b></h3>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Manage Contacts</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-4">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title"><b>Suppliers</b></h3>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Manage Suppliers</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-4">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title"><b>Clients</b></h3>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Manage Clients</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 </div>
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
