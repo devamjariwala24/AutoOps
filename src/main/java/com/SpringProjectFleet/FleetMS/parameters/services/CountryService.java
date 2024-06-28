@@ -16,6 +16,9 @@ public class CountryService {
     @Autowired
     private CountryRepository countryRepository;
 
+    public List<Country> findAll(){
+        return countryRepository.findAll();
+    }
     public List<Country> getALl(){
         return countryRepository.findAll();
     }
