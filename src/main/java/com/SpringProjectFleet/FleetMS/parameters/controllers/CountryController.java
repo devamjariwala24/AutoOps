@@ -11,8 +11,7 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 
 import java.util.List;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
+
 @Controller
 public class CountryController {
 
@@ -38,6 +37,13 @@ public class CountryController {
         return "parameters/countryEdit";
     }
 
+    @GetMapping("/countryDetails/{id}")
+    public String detailsCountry(@PathVariable Integer id, Model model){
+        Country country = countryService.getById(id);
+        model.addAttribute("country", country);
+        return "parameters/countryDetails";
+    }
+
     @PostMapping("/countries")
     public String save(Country country){
         countryService.save(country);
@@ -51,7 +57,7 @@ public class CountryController {
     }
 
     @RequestMapping(value = "/countries/update/{id}", method={RequestMethod.GET, RequestMethod.PUT})
-    public String delete(Country country){
+    public String updateCountry(Country country){
         countryService.save(country);
         return "redirect:/countries";
     }

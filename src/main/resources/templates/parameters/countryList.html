@@ -34,7 +34,8 @@
                         <td th:text="${country.continent}"></td>
                         <td>
                             <div class="btn-group">
-                                <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
+                                <a class="btn btn-primary" th:href="@{'/countryDetails/' + ${country.id}}">
+                                    <i class="icon_plus_alt2"></i></a>
                                 <a class="btn btn-success" th:href="@{'/countryEdit/' + ${country.id}}">
                                     <i class="icon_check_alt2"></i></a>
                                 <form th:action="@{'/countries/delete/' + ${country.id}}"
