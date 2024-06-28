@@ -4,8 +4,83 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>HR Module</title>
+    <title>Fleet Module</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .wrapper {
+            margin-top: 60px; /* Increase margin-top to create more space from the header */
+        }
+
+        .panel {
+            border: none;
+            box-shadow: none;
+        }
+
+        .card {
+            width: 100%;
+            margin: 20px 0; /* Increase vertical spacing between cards */
+            border: none;
+            border-radius: 15px; /* Round the corners of the cards */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Increase shadow for a softer look */
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            padding: 30px; /* Increase padding inside the cards */
+        }
+
+        .card-body > * {
+            margin-bottom: 20px; /* Increase spacing between elements inside the cards */
+        }
+
+        .panel-body {
+            padding: 10px;
+        }
+
+        .col-lg-4 {
+            margin-bottom: 20px; /* Increase spacing between columns */
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            font-size: 1.25rem; /* Increase font size */
+            padding: 12px 24px; /* Increase padding */
+            border-radius: 50px; /* Make buttons more rounded */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004494;
+        }
+
+        .card-title {
+            font-weight: 700;
+            color: #333;
+        }
+
+        .card-text {
+            color: #666;
+        }
+    </style>
 </head>
+
+
 <body>
 <div layout:fragment="content">
     <section class="wrapper">
@@ -19,15 +94,17 @@
                 </ol>
             </div>
         </div>
+
+
         <div class="row">
             <div class="col-lg-4">
                 <section class="panel">
                     <div class="panel-body">
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title"><b>Locations</b></h3>
+                                <h3 class="card-title"><b>Vehicles</b></h3>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Manage Locations</a>
+                                <a href="#" class="btn btn-primary">Manage Vehicles</a>
                             </div>
                         </div>
                     </div>
@@ -38,9 +115,9 @@
                     <div class="panel-body">
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title"><b>Contacts</b></h3>
+                                <h3 class="card-title"><b>Vehicle Models</b></h3>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Manage Contacts</a>
+                                <a href="#" class="btn btn-primary">Manage Vehicle Models</a>
                             </div>
                         </div>
                     </div>
@@ -51,9 +128,9 @@
                     <div class="panel-body">
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title"><b>Suppliers</b></h3>
+                                <h3 class="card-title"><b>Vehicle Make</b></h3>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Manage Suppliers</a>
+                                <a href="#" class="btn btn-primary">Manage Vehicle Make</a>
                             </div>
                         </div>
                     </div>
@@ -67,9 +144,9 @@
                     <div class="panel-body">
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title"><b>Locations</b></h3>
+                                <h3 class="card-title"><b>Vehicle Status</b></h3>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Manage Locations</a>
+                                <a href="#" class="btn btn-primary">Manage Vehicle Status</a>
                             </div>
                         </div>
                     </div>
@@ -80,9 +157,9 @@
                     <div class="panel-body">
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title"><b>Contacts</b></h3>
+                                <h3 class="card-title"><b>Vehicle Types</b></h3>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Manage Contacts</a>
+                                <a href="#" class="btn btn-primary">Manage Vehicle Types</a>
                             </div>
                         </div>
                     </div>
@@ -93,9 +170,9 @@
                     <div class="panel-body">
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title"><b>Suppliers</b></h3>
+                                <h3 class="card-title"><b>Vehicle Hires</b></h3>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Manage Suppliers</a>
+                                <a href="#" class="btn btn-primary">Manage Vehicle Hires</a>
                             </div>
                         </div>
                     </div>
@@ -109,9 +186,9 @@
                     <div class="panel-body">
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title"><b>Locations</b></h3>
+                                <h3 class="card-title"><b>Vehicle Movements</b></h3>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Manage Locations</a>
+                                <a href="#" class="btn btn-primary">Manage Vehicle Movements</a>
                             </div>
                         </div>
                     </div>
@@ -122,22 +199,9 @@
                     <div class="panel-body">
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title"><b>Contacts</b></h3>
+                                <h3 class="card-title"><b>Vehicle Maintenance</b></h3>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Manage Contacts</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-4">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div class="card">
-                            <div class="card-body">
-                                <h3 class="card-title"><b>Suppliers</b></h3>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Manage Suppliers</a>
+                                <a href="#" class="btn btn-primary">Manage Vehicle Maintenance</a>
                             </div>
                         </div>
                     </div>
