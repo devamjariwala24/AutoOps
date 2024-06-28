@@ -16,11 +16,6 @@ public class ApplicationController {
         return "layout";
     }
 
-    @GetMapping("/index2")
-    public String Content(){
-        return "index2";
-    }
-
     @GetMapping("/hr")
     public String hr(){
         return "/hr/index";
@@ -35,6 +30,7 @@ public class ApplicationController {
     public String accounts(){
         return "/accounts/index";
     }
+
     @GetMapping("/helpdesk")
     public String helpdesk(){
         return "/helpdesk/index";
@@ -49,4 +45,18 @@ public class ApplicationController {
     public String payroll(){
         return "/payroll/index";
     }
+
+    @GetMapping("/reports")
+    public String reports(){
+        return "/reports/index";
+    }
+
+    @GetMapping("/security")
+    public String security(){
+        return "/security/index";
+    }
+
+
 }
+
+
