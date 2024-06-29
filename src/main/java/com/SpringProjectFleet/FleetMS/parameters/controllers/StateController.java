@@ -5,10 +5,11 @@ import com.SpringProjectFleet.FleetMS.parameters.services.CountryService;
 import com.SpringProjectFleet.FleetMS.parameters.services.StateService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 
 @Controller
@@ -45,17 +46,22 @@ public class StateController {
         return "/parameters/state" + op;
     }
 
-    //Add State
     @PostMapping(value="/parameters/states")
     public String addNew(State state) {
         stateService.save(state);
-        return "redirect:/parameters/states";
+        return "redirect:/states";
     }
 
-    @RequestMapping(value="/parameters/states/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    @DeleteMapping(value="/states/delete/{id}")
     public String delete(@PathVariable Integer id) {
         stateService.delete(id);
-        return "redirect:/parameters/states";
+        return "redirect:/states";
     }
+
+    @Bean
+    public HiddenHttpMethodFilter hiddenStateHttpMethodFilter() {
+        return new HiddenHttpMethodFilter();
+    }
+
 
 }
