@@ -2,103 +2,187 @@
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
+<head>
+    <title>Edit this State</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .wrapper {
+            margin-top: 60px;
+        }
+
+        .panel {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .panel-heading {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            font-size: 1.5rem; /* Increase heading font size */
+            font-weight: 700; /* Make heading font bolder */
+        }
+
+        .panel-body {
+            padding: 10px;
+        }
+
+        .btn {
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 8px 24px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-warning {
+            background-color: #ffc107; /* Yellow background color */
+            border-color: #ffc107; /* Yellow border color */
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+
+        .btn-save {
+            background-color: #0741ff; /* Yellow background color */
+            border-color: #ffc107; /* Yellow border color */
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-warning:hover {
+            background-color: #ffca2c; /* Darker yellow on hover */
+            border-color: #ffca2c; /* Darker yellow border on hover */
+            color: #333; /* Darker text color on hover */
+        }
+
+        .btn-save:hover {
+            background-color: #2009ff; /* Darker yellow on hover */
+            border-color: #ffca2c; /* Darker yellow border on hover */
+            color: #333; /* Darker text color on hover */
+        }
+
+
+    </style>
+
+</head>
 <body>
 
 <div layout:fragment="content">
     <section class="wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="page-header"><i class="fa fa fa-bars"></i> Parameters</h3>
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/index">Home</a></li>
                     <li><i class="fa fa-bars"></i><a href="/parameters">Parameters</a></li>
-                    <li><i class="fa fa-square-o"></i>Parameters</li>
+                    <li><i class="fa fa-square-o"></i>Location Edit</li>
                 </ol>
             </div>
         </div>
         <div class="container" style="width: 70%">
-            <div class="row justify-content-center" >
-                <form class="form-horizontal" th:action="@{/parameters/locations}" method="post">
-                    <section class="panel">
-                        <header class="panel-heading">
-                            Edit Location Record
-                        </header>
-                        <div class="panel-body">
-                            <div style="padding:10px">
-                                <div class="form-group row">
-                                    <label class="col-form-label col-sm-4">Id:</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" th:value="${location.id}" class="form-control" name="id" readonly>
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <form class="form-horizontal" th:action="@{'/locations'}" method="post">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Edit Location Record
+                            </header>
+                            <div class="panel-body">
+                                <div style="padding:10px">
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-sm-4">Description:</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" th:value="${location.description}" class="form-control"
+                                                   name="description">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-sm-4">Description:</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" th:value="${location.description}" class="form-control" name="description">
+                                    <div class="form-group row">
+                                        <label for="cityAdd" class="col-form-label col-sm-4">City:</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" th:value="${location.city}" class="form-control"
+                                                   id="cityAdd" name="city">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="cityAdd" class="col-form-label col-sm-4">City:</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" th:value="${location.city}" class="form-control" id="cityAdd" name="city">
+                                    <div class="form-group row">
+                                        <label for="detailsAdd" class="col-form-label col-sm-4">Address:</label>
+                                        <div class="col-sm-6">
+                                            <textarea type="text" th:field="${location.address}" class="form-control"
+                                                      id="addressAdd" name="address"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="detailsAdd" class="col-form-label col-sm-4">Address:</label>
-                                    <div class="col-sm-6">
-                                        <textarea type="text" th:field="${location.address}" class="form-control" id="addressAdd" name="address"></textarea>
+                                    <div class="form-group row">
+                                        <label for="ddlCountryAdd" class="col-form-label col-sm-4">Country: </label>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" id="ddlCountryAdd" name="countryid">
+                                                <option th:value="${null}">-SELECT-</option>
+                                                <option th:each="country : ${countries}"
+                                                        th:value="${country.id}"
+                                                        th:selected="${country.id} == ${location.countryid}?True: False"
+                                                        th:text="${country.description}">
+                                                </option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="ddlCountryAdd" class="col-form-label col-sm-4">Country: </label>
-                                    <div class="col-sm-6">
-                                        <select class="form-control" id="ddlCountryAdd" name="countryid">
-                                            <option th:value="${null}">-SELECT-</option>
-                                            <option th:each="country : ${countries}"
-                                                    th:value="${country.id}"
-                                                    th:selected="${country.id} == ${location.countryid}?True: False"
-                                                    th:text="${country.description}">
-                                            </option>
-                                        </select>
+                                    <div class="form-group row">
+                                        <label for="ddlStateAdd" class="col-form-label col-sm-4">State: </label>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" id="ddlStateAdd" name="stateid">
+                                                <option th:value="${null}">-SELECT-</option>
+                                                <option th:each="state : ${states}"
+                                                        th:value="${state.id}"
+                                                        th:selected="${state.id} == ${location.stateid}?True: False"
+                                                        th:text="${state.name}">
+                                                </option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="ddlStateAdd" class="col-form-label col-sm-4">State: </label>
-                                    <div class="col-sm-6">
-                                        <select class="form-control" id="ddlStateAdd" name="stateid">
-                                            <option th:value="${null}">-SELECT-</option>
-                                            <option th:each="state : ${states}"
-                                                    th:value="${state.id}"
-                                                    th:selected="${state.id} == ${location.stateid}?True: False"
-                                                    th:text="${state.name}">
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="detailsAdd" class="col-form-label col-sm-4">Details:</label>
-                                    <div class="col-sm-6">
-                                        <textarea type="text" th:field="${location.details}" class="form-control" id="detailsAdd" name="details"></textarea>
+                                    <div class="form-group">
+                                        <label for="detailsAdd" class="col-form-label col-sm-4">Details:</label>
+                                        <div class="col-sm-6">
+                                            <textarea type="text" th:field="${location.details}" class="form-control"
+                                                      id="detailsAdd" name="details"></textarea>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-                    <section class="panel">
-                        <div class="panel-body">
-                            <button type="submit" class="btn btn-primary">
-                                Save
-                            </button>
-                            <a href="/parameters/locations" class="btn  btn-warning">
-                                Exit
-                            </a>
-                        </div>
-                    </section>
-                </form>
+                        </section>
+                        <section class="panel">
+                            <div class="panel-body">
+                                <button type="submit" class="btn btn-save">
+                                    Save
+                                </button>
+                                <a href="/locations" class="btn btn-warning">
+                                    Exit
+                                </a>
+                            </div>
+                        </section>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 </div>
-
 </body>
 </html>

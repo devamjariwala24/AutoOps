@@ -27,37 +27,43 @@ public class LocationController {
         return model;
     }
 
-    @GetMapping("/parameters/locations")
+    @GetMapping("/locations")
     public String findAll(Model model){
         addModelAttributes(model);
         return "/parameters/locations";
     }
 
-    @GetMapping("/parameters/locationAdd")
+    @GetMapping("/locationAdd")
     public String addLocation(Model model){
         addModelAttributes(model);
         return "/parameters/locationAdd";
     }
 
     //The op parameter is either Edit or Details
-    @GetMapping("/parameters/location/{op}/{id}")
-    public String editLocation(@PathVariable Integer id, @PathVariable String op, Model model){
+    @GetMapping("/locationEdit{id}")
+    public String editLocation(@PathVariable Integer id, Model model){
         addModelAttributes(model);
         model.addAttribute("location", locationService.findById(id));
-        return "/parameters/location" + op;
-
+        return "/parameters/locationEdit";
     }
 
-    @PostMapping("/parameters/locations")
+    @GetMapping("/locationDetails{id}")
+    public String detailLocation(@PathVariable Integer id, Model model){
+        addModelAttributes(model);
+        model.addAttribute("location", locationService.findById(id));
+        return "/parameters/locationDetails";
+    }
+
+    @PostMapping("/locations")
     public String save(Location location) {
         locationService.save(location);
-        return "redirect:/parameters/locations";
+        return "redirect:/locations";
     }
 
     @DeleteMapping(value="/location/delete/{id}")
     public String delete(@PathVariable Integer id) {
         locationService.deleteById(id);
-        return "redirect:/parameters/locations";
+        return "redirect:/locations";
     }
 
 
