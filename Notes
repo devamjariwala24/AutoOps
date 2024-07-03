@@ -40,3 +40,6 @@ Inheritance:
 
 Properties and methods of a @MappedSuperclass are inherited by the entity subclasses. This allows for sharing common
 attributes and methods among multiple entity classes without repeating the code.
+
+<a> anchor tag generates a get request and as we have written a delete request, it will throw an error. to cater this,
+ when submitting a form, use <form> tag.

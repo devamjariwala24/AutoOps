@@ -3,13 +3,16 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
 <body>
 
 <div layout:fragment="content">
     <section class="wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="page-header"><i class="fa fa fa-bars"></i> Parameters</h3>
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/index">Home</a></li>
                     <li><i class="fa fa-bars"></i><a href="/parameters">Parameters</a></li>
@@ -19,7 +22,7 @@
         </div>
         <div class="container" style="width: 70%">
             <div class="row">
-                <form class="form-horizontal" th:action="@{/parameters/states}" method="post">
+                <form class="form-horizontal" th:action="@{'/states'}" method="post">
                     <div class="col-lg-12">
                         <section class="panel">
                             <header class="panel-heading">

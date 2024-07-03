@@ -3,17 +3,30 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 
+<head>
+    <meta charset="UTF-8">
+    <title>State Details</title>
+
+
+<style>
+
+
+
+
+
+
+</style>
+</head>
 <body>
 
 <div layout:fragment="content">
     <section class="wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="page-header"><i class="fa fa fa-bars"></i> STATES</h3>
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/index">Home</a></li>
                     <li><i class="fa fa-bars"></i><a href="/parameters">Parameters</a></li>
-                    <li><i class="fa fa-square-o"></i>Parameters</li>
+                    <li><i class="fa fa-square-o"></i>State Details</li>
                 </ol>
             </div>
         </div>
@@ -49,25 +62,29 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-4">Name</label>
                                     <div class="col-sm-6">
-                                        <input name="name" th:value="${state.name}" type="text"class="form-control" readonly>
+                                        <input name="name" th:value="${state.name}" type="text" class="form-control"
+                                               readonly>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-sm-4">Capital</label>
                                     <div class="col-sm-6">
-                                        <input name="capital" th:value="${state.capital}" class="form-control" size="16" type="text" readonly>
+                                        <input name="capital" th:value="${state.capital}" class="form-control" size="16"
+                                               type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-sm-4"> Code</label>
                                     <div class="col-sm-6">
-                                        <input name="code" type="text" th:value="${state.code}" class=" form-control" readonly/>
+                                        <input name="code" type="text" th:value="${state.code}" class=" form-control"
+                                               readonly/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-sm-4">Details</label>
                                     <div class="col-sm-5">
-                                        <input name="details" th:value="${state.details}" type="text" class="form-control" readonly>
+                                        <input name="details" th:value="${state.details}" type="text"
+                                               class="form-control" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -75,8 +92,8 @@
 
                         <section class="panel">
                             <div class="panel-body">
-                                <button type="submit"  class="btn btn-success" disabled>Save</button>
-                                <a href="/parameters/states" class="btn btn-warning">Exit</a>
+                                <button type="submit" class="btn btn-success" disabled>Save</button>
+                                <a href="/states" class="btn btn-warning">Exit</a>
                             </div>
                         </section>
 

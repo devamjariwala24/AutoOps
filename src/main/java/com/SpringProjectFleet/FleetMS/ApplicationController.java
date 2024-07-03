@@ -15,7 +15,10 @@ public class ApplicationController {
     public String widget(){
         return "layout";
     }
-
+    @GetMapping("/parameters/layout")
+    public String widget1(){
+        return "layout";
+    }
     @GetMapping("/hr")
     public String hr(){
         return "/hr/index";
