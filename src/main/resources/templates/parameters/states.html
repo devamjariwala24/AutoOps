@@ -105,10 +105,10 @@
                             <td th:text="${state.details}"></td>
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn btn-primary" th:href="@{'/stateDetails/' + ${state.id}}">
+                                    <a class="btn btn-primary" th:href="@{'/stateDetails' + ${state.id}}">
                                         <i class="icon_document_alt"></i>
                                     </a>
-                                    <a class="btn btn-success" th:href="@{'/stateEdit/' + ${state.id}}">
+                                    <a class="btn btn-success" th:href="@{'/stateEdit' + ${state.id}}">
                                         <i class="icon_pencil-edit"></i>
                                     </a>
                                     <form th:action="@{'/states/delete/' + ${state.id}}" method="post" style="display:inline;">

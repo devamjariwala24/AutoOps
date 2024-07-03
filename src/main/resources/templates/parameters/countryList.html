@@ -107,10 +107,10 @@
                             <td th:text="${country.continent}"></td>
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn btn-primary" th:href="@{'/countryDetails/' + ${country.id}}">
+                                    <a class="btn btn-primary" th:href="@{'/countryDetails' + ${country.id}}">
                                         <i class="icon_document_alt"></i>
                                     </a>
-                                    <a class="btn btn-success" th:href="@{'/countryEdit/' + ${country.id}}">
+                                    <a class="btn btn-success" th:href="@{'/countryEdit' + ${country.id}}">
                                         <i class="icon_pencil-edit"></i>
                                     </a>
                                     <form th:action="@{'/countries/delete/' + ${country.id}}" method="post" style="display:inline;">

@@ -31,7 +31,7 @@
         }
 
         @GetMapping("/countryEdit{id}")
-        public String editCountry(@PathVariable Integer id, Model model){
+        public String editCountryFromCountryListPage(@PathVariable Integer id, Model model){
             Country country = countryService.getById(id);
             model.addAttribute("country", country);
             return "parameters/countryEdit";
@@ -51,15 +51,15 @@
         }
 
         @DeleteMapping("/countries/delete/{id}")
-        public String delete(@PathVariable Integer id){
+        public String deleteCountryFromCountryListPage(@PathVariable Integer id){
             countryService.delete(id);
             return "redirect:/countries";
         }
 
-        @RequestMapping(value = "/countries/update/{id}", method={RequestMethod.GET, RequestMethod.PUT})
-        public String updateCountry(Country country){
+        @PostMapping(value = "/countries/update/{id}")
+        public String updateCountryFromCountryEditPage(Country country){
             countryService.save(country);
-            return "parameters/countryList";
+            return "redirect:/countries";
         }
 
         @Bean
