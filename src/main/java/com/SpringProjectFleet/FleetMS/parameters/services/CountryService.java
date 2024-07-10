@@ -34,4 +34,9 @@ public class CountryService {
     public Country getById(Integer id) {
         return countryRepository.findById(id).orElse(null);
     }
+    public Country getByIdWithStates(Integer id) {
+        return countryRepository.findByIdWithStates(id)
+                .orElseThrow(() -> new RuntimeException("Country not found"));
+    }
+
 }

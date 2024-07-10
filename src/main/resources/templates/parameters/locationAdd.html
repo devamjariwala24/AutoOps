@@ -4,10 +4,12 @@
       layout:decorate="~{layout}">
 
 <head>
-    <title>Add a New State</title>
+    <title>Add a New Location</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- Custom CSS -->
     <style>
         body {
@@ -135,30 +137,26 @@
                                         </textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="ddlCountryAdd" class="col-form-label col-sm-4">Country: </label>
-                                        <div class="col-sm-6">
-                                            <select class="form-control" id="ddlCountryAdd" name="countryid">
-                                                <option th:value="${null}">-SELECT-</option>
-                                                <option th:each="country : ${countries}"
-                                                        th:value="${country.id}"
-                                                        th:text="${country.description}">
-                                                </option>
-                                            </select>
-                                        </div>
+                                <div class="form-group row">
+                                    <label for="ddlCountryAdd" class="col-form-label col-sm-4">Country: </label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="ddlCountryAdd" name="countryid">
+                                            <option th:value="${null}">-SELECT-</option>
+                                            <option th:each="country : ${countries}"
+                                                    th:value="${country.id}"
+                                                    th:text="${country.description}">
+                                            </option>
+                                        </select>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="ddlStateAdd" class="col-form-label col-sm-4">State: </label>
-                                        <div class="col-sm-6">
-                                            <select class="form-control" id="ddlStateAdd" name="stateid">
-                                                <option th:value="${null}">-SELECT-</option>
-                                                <option th:each="state : ${states}"
-                                                        th:value="${state.id}"
-                                                        th:text="${state.name}">
-                                                </option>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ddlStateAdd" class="col-form-label col-sm-4">State: </label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="ddlStateAdd" name="stateid">
+                                            <option value="">-SELECT-</option>
+                                        </select>
                                     </div>
+                                </div>
                                     <div class="form-group">
                                         <label for="detailsAdd" class="col-form-label col-sm-4">Details:</label>
                                         <div class="col-sm-6">
@@ -183,33 +181,47 @@
             </div>
         </div>
     </section>
-</div>
-<th:block layout:fragment="script">
+
     <script language="JavaScript">
-        $(document).ready(function () { // Corrected Line 1
+        console.log("Script is running");
+        $('document').ready(function () {
+            $('#ddlCountryAdd').on('change', function () {
+                var countryId = $(this).val();
+                var stateSelect = $('#ddlStateAdd');
 
-            $('#ddlCountryAdd').on('change', function () { // Line 2
-                console.log("I got here!");
+                console.log("Selected country ID:", countryId);
 
-                $('#ddlStateAdd').empty().append('<option value="null">-SELECT-</option>'); // Line 3
+                stateSelect.empty().append('<option value="">-SELECT-</option>');
 
-                var countryid = $(this).val(); // Line 4
-
-                var href = /*[[@{/parameters/country/}]]*/ 'http://localhost:8081/parameters/country/' + countryid; // Line 5
-
-                $.get(href, function (country, status) { // Line 6
-
-                    var states = country.states; // Line 7
-
-                    for (var i = 0; i < states.length; i++) { // Corrected Line 8
-                        $('#ddlStateAdd').append('<option value="' + states[i].id + '">' + states[i].name + '</option>'); // Line 9
-                    }
-                });
+                if (countryId) {
+                    $.ajax({
+                        url: "/parameters/country/" + countryId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(country) {
+                            console.log("Received country data:", country);
+                            if (country && country.states) {
+                                console.log("Number of states:", country.states.length);
+                                $.each(country.states, function(i, state) {
+                                    stateSelect.append($('<option></option>')
+                                        .attr('value', state.id)
+                                        .text(state.name));
+                                });
+                            } else {
+                                console.log("No states found in country data");
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error fetching states:', status, error);
+                            console.error('Response:', xhr.responseText);
+                        }
+                    });
+                }
             });
-
         });
+
     </script>
-</th:block>
+</div>
 
 </body>
 </html>

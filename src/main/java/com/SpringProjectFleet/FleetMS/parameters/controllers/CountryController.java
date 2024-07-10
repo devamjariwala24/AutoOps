@@ -25,6 +25,13 @@
            return "parameters/countryList";
         }
 
+
+        @GetMapping("/parameters/country/{id}")
+        @ResponseBody
+        public Country getCountry(@PathVariable Integer id) {
+            return countryService.getByIdWithStates(id);
+        }
+
         @GetMapping("/countryAdd")
         public String addCountry(){
             return "parameters/countryAdd";
