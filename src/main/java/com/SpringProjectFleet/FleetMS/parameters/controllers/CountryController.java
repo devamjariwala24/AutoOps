@@ -28,8 +28,8 @@
 
         @GetMapping("/parameters/country/{id}")
         @ResponseBody
-        public Country getCountry(@PathVariable Integer id) {
-            return countryService.getByIdWithStates(id);
+        public Country getCountry(@PathVariable Integer id){
+        return countryService.getById(id);
         }
 
         @GetMapping("/countryAdd")
