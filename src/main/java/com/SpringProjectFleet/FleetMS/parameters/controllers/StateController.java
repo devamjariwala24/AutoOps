@@ -1,5 +1,6 @@
 package com.SpringProjectFleet.FleetMS.parameters.controllers;
 
+import com.SpringProjectFleet.FleetMS.parameters.models.Country;
 import com.SpringProjectFleet.FleetMS.parameters.models.State;
 import com.SpringProjectFleet.FleetMS.parameters.services.CountryService;
 import com.SpringProjectFleet.FleetMS.parameters.services.StateService;
@@ -36,24 +37,24 @@ public class StateController {
     @GetMapping("/stateAdd")
     public String addState(Model model){
         addModelAttribute(model);
-        return "parameters/stateAdd";
+        return "/parameters/stateAdd";
     }
 
     @GetMapping("/stateDetails{id}")
     public String detailsState(@PathVariable Integer id, Model model){
         State state = stateService.findById(id);
         model.addAttribute("state", state);
-        return "parameters/stateDetails";
+        return "/parameters/stateDetails";
     }
 
     @GetMapping("/stateEdit{id}")
     public String editState(@PathVariable Integer id, Model model){
         State state = stateService.findById(id);
         model.addAttribute("state", state);
-        return "parameters/stateEdit";
+        return "/parameters/stateEdit";
     }
 
-    @PostMapping("/states")
+    @PostMapping("/stateSave")
     public String saveState(State state) {
         stateService.save(state);
         return "redirect:/states";
@@ -62,6 +63,12 @@ public class StateController {
     @DeleteMapping(value="/states/delete/{id}")
     public String delete(@PathVariable Integer id) {
         stateService.delete(id);
+        return "redirect:/states";
+    }
+
+    @PostMapping(value = "/state/update/{id}")
+    public String updateStateFromStateEditPage(State state){
+        stateService.save(state);
         return "redirect:/states";
     }
 

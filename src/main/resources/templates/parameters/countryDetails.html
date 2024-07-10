@@ -85,10 +85,9 @@
                           method="post">
                         <section class="panel">
                             <header class="panel-heading">
-                                Country Records
+                                <span th:text = "${country.description}"></span>
                             </header>
                             <div class="panel-body">
-                                <!--date picker start-->
                                 <div class="form-group">
                                     <label class="control-label col-sm-4">Description</label>
                                     <div class="col-sm-6">
@@ -128,12 +127,37 @@
                                                readonly type="text" class="form-control">
                                     </div>
                                 </div>
-
+                            </div>
+                        </section>
+                        <section class="panel">
+                            <header class="panel-heading">
+                                States in <span th:text ="${country.description}" ></span>
+                            </header>
+                            <div class="panel-body">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th><i class="fa fa-list-ol"></i> Index</th>
+                                        <th><i class="icon_profile"></i> Name</th>
+                                        <th><i class="icon_calendar"></i> Capital</th>
+                                        <th><i class="icon_mail_alt"></i> Code</th>
+                                        <th><i class="icon_pin_alt"></i> Details</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="state, index : ${country.states}">
+                                        <td th:text="${index.index + 1}"><i class="fa fa-table"></i></td>
+                                        <td th:text="${state.name}"></td>
+                                        <td th:text="${state.capital}"></td>
+                                        <td th:text="${state.code}"></td>
+                                        <td th:text="${state.details}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </section>
 
                         <section class="panel">
-
                             <div class="panel-body">
                                 <a href="/countries" class="btn btn-warning">
                                     Exit

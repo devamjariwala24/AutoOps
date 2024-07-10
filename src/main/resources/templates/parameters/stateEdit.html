@@ -104,7 +104,7 @@
         <div class="container" style="width: 70%">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <form class="form-horizontal" th:action="@{'/states'}" method="post">
+                    <form class="form-horizontal" th:action="@{'/state/update/' + ${state.id}}" method="post">
                         <section class="panel">
                             <header class="panel-heading">
                                 Add New State Record
@@ -138,14 +138,20 @@
                                 </div>
                             </div>
                         </section>
+
+
                         <section class="panel">
+
                             <div class="panel-body">
-                                <button type="submit" class="btn btn-save">Save</button>
+                                <button type="submit" class="btn btn-save">
+                                    Save
+                                </button>
                                 <a href="/states" class="btn btn-warning">
                                     Exit
                                 </a>
                             </div>
                         </section>
+
                     </form>
                 </div>
             </div>
