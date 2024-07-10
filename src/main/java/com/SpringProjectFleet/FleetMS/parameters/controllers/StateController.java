@@ -35,27 +35,27 @@ public class StateController {
     @GetMapping("/states")
     public String findAll(Model model){
         addModelAttribute(model);
-        return "/parameters/states";
+        return "/parameters/States/states";
     }
 
     @GetMapping("/stateAdd")
     public String addState(Model model){
         addModelAttribute(model);
-        return "/parameters/stateAdd";
+        return "/parameters/States/stateAdd";
     }
 
     @GetMapping("/stateDetails{id}")
     public String detailsState(@PathVariable Integer id, Model model){
         State state = stateService.findById(id);
         model.addAttribute("state", state);
-        return "/parameters/stateDetails";
+        return "/parameters/States/stateDetails";
     }
 
     @GetMapping("/stateEdit{id}")
     public String editState(@PathVariable Integer id, Model model){
         State state = stateService.findById(id);
         model.addAttribute("state", state);
-        return "/parameters/stateEdit";
+        return "/parameters/States/stateEdit";
     }
 
     @DeleteMapping(value="/states/delete/{id}")

@@ -22,7 +22,7 @@
         public String getAll(Model model){
             List<Country> countries = countryService.getALl();
             model.addAttribute("countries", countries);
-           return "parameters/countryList";
+           return "parameters/Countries/countryList";
         }
 
 
@@ -34,21 +34,21 @@
 
         @GetMapping("/countryAdd")
         public String addCountry(){
-            return "parameters/countryAdd";
+            return "parameters/Countries/countryAdd";
         }
 
         @GetMapping("/countryEdit{id}")
         public String editCountryFromCountryListPage(@PathVariable Integer id, Model model){
             Country country = countryService.getById(id);
             model.addAttribute("country", country);
-            return "parameters/countryEdit";
+            return "parameters/Countries/countryEdit";
         }
 
         @GetMapping("/countryDetails{id}")
         public String detailsCountry(@PathVariable Integer id, Model model){
             Country country = countryService.getById(id);
             model.addAttribute("country", country);
-            return "parameters/countryDetails";
+            return "parameters/Countries/countryDetails";
         }
 
         @PostMapping("/parameters/countryList")
