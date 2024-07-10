@@ -26,7 +26,11 @@ public class StateController {
         model.addAttribute("countries", countryService.findAll());
         return model;
     }
-
+    @PostMapping("/parameters/states")
+    public String saveCountryFromCountryAddPage(State state){
+        stateService.save(state);
+        return "redirect:/states";
+    }
 
     @GetMapping("/states")
     public String findAll(Model model){
@@ -52,12 +56,6 @@ public class StateController {
         State state = stateService.findById(id);
         model.addAttribute("state", state);
         return "/parameters/stateEdit";
-    }
-
-    @PostMapping("/stateSave")
-    public String saveState(State state) {
-        stateService.save(state);
-        return "redirect:/states";
     }
 
     @DeleteMapping(value="/states/delete/{id}")

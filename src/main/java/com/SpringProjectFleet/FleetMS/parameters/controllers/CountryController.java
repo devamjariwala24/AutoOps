@@ -52,7 +52,7 @@
         }
 
         @PostMapping("/parameters/countryList")
-        public String save(Country country){
+        public String saveCountryFromCountryAddPage(Country country){
             countryService.save(country);
             return "redirect:/countries";
         }
