@@ -29,7 +29,6 @@
             padding: 10px;
         }
 
-
         .btn-new-state {
             background-color: #007bff;
             border-color: #007bff;
@@ -45,7 +44,6 @@
             border-color: #004494;
         }
 
-
         .btn-new-state {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -54,9 +52,69 @@
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         }
 
-        .btn-group{
+        .btn-group {
             width: 40px;
         }
+
+        .table-bordered {
+            border: 2px solid #dee2e6;
+        }
+
+        .table-bordered th,
+        .table-bordered td {
+            border: 2px solid #dee2e6;
+        }
+
+        .table thead th {
+            background-color: #f4f6f9;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .breadcrumb a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #0056b3;
+        }
+
+
+        .table-bordered {
+            border: 2px solid #dee2e6;
+        }
+
+        .table-bordered th,
+        .table-bordered td {
+            border: 2px solid #dee2e6;
+        }
+
+        .table thead th {
+            background-color: #f4f6f9;
+            font-weight: 700;
+            color: #333;
+        }
+
+
+        .table th, .table td {
+            width: 14.28%; /* 100% divided by 6 columns */
+            text-align: center; /* Center align text in each cell */
+        }
+
+        .panel-heading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px; /* Adjust height as needed */
+            background-color: #007bff;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
 
     </style>
 </head>
@@ -75,7 +133,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <section class="panel">
+                <section class="panel" style="margin-bottom: 0px;">
                     <div class="panel-body">
                         <a href="/countryAdd" class="btn btn-new-state">
                             New Country
@@ -87,8 +145,8 @@
                         List of Countries
                     </header>
 
-                    <table class="table table-striped table-advance table-hover">
-                        <tbody>
+                    <table class="table table-bordered table-striped table-advance table-hover">
+                        <thead>
                         <tr>
                             <th><i class="fa fa-list-ol"></i> Index</th>
                             <th><i class="icon_profile"></i> Country Name</th>
@@ -98,6 +156,8 @@
                             <th><i class="icon_mobile"></i> Continent</th>
                             <th><i class="icon_cogs"></i> Action</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         <tr th:each="country, index : ${countries}">
                             <td th:text="${index.index + 1}"><i class="fa fa-table"></i></td>
                             <td th:text="${country.description}"></td>
@@ -122,17 +182,12 @@
                                 </div>
                             </td>
                         </tr>
-
                         </tbody>
                     </table>
-
                 </section>
             </div>
         </div>
-        <!--Content of the page-->
     </section>
 </div>
-
-
 </body>
 </html>

@@ -12,7 +12,6 @@ public class CountryService {
 
     // here, we have to autowire the repository with the service to fetch the data coming from the repository into the
     // service.
-
     @Autowired
     private CountryRepository countryRepository;
 

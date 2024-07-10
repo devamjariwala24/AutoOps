@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <title>Edit this Location</title>
+    <title>Edit this Contact</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -97,72 +97,60 @@
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/index">Home</a></li>
                     <li><i class="fa fa-bars"></i><a href="/parameters">Parameters</a></li>
-                    <li><i class="fa fa-square-o"></i>Location Edit</li>
+                    <li><i class="fa fa-square-o"></i>Contact Edit</li>
                 </ol>
             </div>
         </div>
         <div class="container" style="width: 70%">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <form class="form-horizontal" th:action="@{'/location/update/' + ${location.id}}" method="post">
+                    <form class="form-horizontal" th:action="@{'/contact/update/' + ${contact.id}}" method="post">
                         <section class="panel">
                             <header class="panel-heading">
-                                Edit Location Record
+                                Edit Contact Record
                             </header>
                             <div class="panel-body">
                                 <div style="padding:10px">
                                     <div class="form-group row">
-                                        <label class="control-label col-sm-4">Description</label>
+                                        <label for="firstname" class="control-label col-sm-4">First Name</label>
                                         <div class="col-sm-6">
-                                            <input type="text" th:value="${location.description}" class="form-control"
-                                                   name="description">
+                                            <input type="text" th:value="${contact.firstname}" class="form-control"
+                                                   id="firstname" name="firstname">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="cityAdd" class="control-label col-sm-4">City</label>
+                                        <label for="lastname" class="control-label col-sm-4">Last Name</label>
                                         <div class="col-sm-6">
-                                            <input type="text" th:value="${location.city}" class="form-control"
-                                                   id="cityAdd" name="city">
+                                            <input type="text" th:value="${contact.lastname}" class="form-control"
+                                                   id="lastname" name="lastname">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="detailsAdd" class="control-label col-sm-4">Address</label>
+                                        <label for="email" class="control-label col-sm-4">Email</label>
                                         <div class="col-sm-6">
-                                            <textarea type="text" th:field="${location.address}" class="form-control"
-                                                      id="addressAdd" name="address"></textarea>
+                                            <textarea type="text" th:field="${contact.email}" class="form-control"
+                                                      id="email" name="address"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="ddlCountryAdd" class="control-label col-sm-4">Country</label>
+                                        <label for="mobile" class="control-label col-sm-4">Mobile</label>
                                         <div class="col-sm-6">
-                                            <select class="form-control" id="ddlCountryAdd" name="countryid">
-                                                <option th:value="${null}">-SELECT-</option>
-                                                <option th:each="country : ${countries}"
-                                                        th:value="${country.id}"
-                                                        th:selected="${country.id} == ${location.countryid}?True: False"
-                                                        th:text="${country.description}">
-                                                </option>
-                                            </select>
+                                            <textarea type="text" th:field="${contact.mobile}" class="form-control"
+                                                      id="mobile" name="details"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="ddlStateAdd" class="control-label col-sm-4">State</label>
+                                        <label for="phone" class="control-label col-sm-4">Phone</label>
                                         <div class="col-sm-6">
-                                            <select class="form-control" id="ddlStateAdd" name="stateid">
-                                                <option th:value="${null}">-SELECT-</option>
-                                                <option th:each="state : ${states}"
-                                                        th:value="${state.id}"
-                                                        th:selected="${state.id} == ${location.stateid}?True: False"
-                                                        th:text="${state.name}">
-                                                </option>
-                                            </select>
+                                            <textarea type="text" th:field="${contact.phone}" class="form-control"
+                                                      id="phone" name="details"></textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="detailsAdd" class="control-label col-sm-4">Details</label>
+                                    <div class="form-group row">
+                                        <label for="remarks" class="control-label col-sm-4">Remarks</label>
                                         <div class="col-sm-6">
-                                            <textarea type="text" th:field="${location.details}" class="form-control"
-                                                      id="detailsAdd" name="details"></textarea>
+                                            <textarea type="text" th:field="${contact.remarks}" class="form-control"
+                                                      id="remarks" name="details"></textarea>
                                         </div>
                                     </div>
                                 </div>

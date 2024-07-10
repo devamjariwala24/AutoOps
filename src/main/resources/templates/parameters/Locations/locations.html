@@ -29,6 +29,14 @@
             padding: 10px;
         }
 
+        .breadcrumb a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #0056b3;
+        }
 
         .btn-new-state {
             background-color: #007bff;
@@ -58,6 +66,42 @@
             width: 40px;
         }
 
+        .table-bordered {
+            border: 2px solid #dee2e6;
+        }
+
+        .table-bordered th,
+        .table-bordered td {
+            border: 2px solid #dee2e6;
+        }
+
+        .table thead th {
+            background-color: #f4f6f9;
+            font-weight: 700;
+            color: #333;
+        }
+
+
+        .table th, .table td {
+            width: 16.66%; /* 100% divided by 6 columns */
+            text-align: center; /* Center align text in each cell */
+        }
+
+        .panel-heading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px; /* Adjust height as needed */
+            background-color: #007bff;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -76,7 +120,6 @@
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel" style="margin-bottom: 0px;">
-
                     <div class="panel-body">
                         <a href="/locationAdd" class="btn btn-new-state">
                             Add New Location
@@ -88,8 +131,8 @@
                         Locations List
                     </header>
 
-                    <table class="table table-striped table-advance table-hover">
-                        <tbody>
+                    <table class="table table-bordered table-striped table-advance table-hover">
+                        <thead>
                         <tr>
                             <th><i class="fa fa-list-ol"></i> Index</th>
                             <th><i class="icon_table"></i> City</th>
@@ -98,6 +141,8 @@
                             <th><i class="icon_table"></i> Address</th>
                             <th><i class="icon_cogs"></i> Action</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         <tr th:each="location, index : ${locations}">
                             <td th:text="${index.index + 1}"><i class="fa fa-table"></i></td>
                             <td th:text="${location.city}">City</td>
@@ -107,10 +152,10 @@
                             <td>
                                 <div class="btn-group">
                                     <a class="btn btn-primary"
-                                       th:href="@{'/locationDetails'+${location.id}}">
+                                       th:href="@{'/locationDetails' + ${location.id}}">
                                         <i class="icon_document_alt"></i></a>
                                     <a class="btn btn-success"
-                                       th:href="@{'/locationEdit'+${location.id}}">
+                                       th:href="@{'/locationEdit' + ${location.id}}">
                                         <i class="icon_pencil-edit"></i></a>
                                     <form th:action="@{'/location/delete/' + ${location.id}}"
                                           method="post" style="display:inline;">
@@ -129,7 +174,6 @@
             </div>
         </div>
     </section>
-
 </div>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.SpringProjectFleet.FleetMS.parameters.controllers;
 
 
 import com.SpringProjectFleet.FleetMS.parameters.models.Location;
+import com.SpringProjectFleet.FleetMS.parameters.models.State;
 import com.SpringProjectFleet.FleetMS.parameters.services.CountryService;
 import com.SpringProjectFleet.FleetMS.parameters.services.LocationService;
 import com.SpringProjectFleet.FleetMS.parameters.services.StateService;
@@ -30,13 +31,13 @@ public class LocationController {
     @GetMapping("/locations")
     public String findAll(Model model){
         addModelAttributes(model);
-        return "/parameters/locations";
+        return "/parameters/Locations/locations";
     }
 
     @GetMapping("/locationAdd")
     public String addLocation(Model model){
         addModelAttributes(model);
-        return "/parameters/locationAdd";
+        return "/parameters/Locations/locationAdd";
     }
 
     //The op parameter is either Edit or Details
@@ -44,14 +45,14 @@ public class LocationController {
     public String editLocation(@PathVariable Integer id, Model model){
         addModelAttributes(model);
         model.addAttribute("location", locationService.findById(id));
-        return "/parameters/locationEdit";
+        return "/parameters/Locations/locationEdit";
     }
 
     @GetMapping("/locationDetails{id}")
     public String detailLocation(@PathVariable Integer id, Model model){
         addModelAttributes(model);
         model.addAttribute("location", locationService.findById(id));
-        return "/parameters/locationDetails";
+        return "/parameters/Locations/locationDetails";
     }
 
     @PostMapping("/locations")
@@ -65,7 +66,11 @@ public class LocationController {
         locationService.deleteById(id);
         return "redirect:/locations";
     }
-
+    @PostMapping(value = "/location/update/{id}")
+    public String updateLocationFromLocationEditPage(Location location){
+        locationService.save(location);
+        return "redirect:/locations";
+    }
 
     @Bean
     public HiddenHttpMethodFilter hiddenLocationHttpMethodFilter() {

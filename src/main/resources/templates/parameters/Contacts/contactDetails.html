@@ -3,9 +3,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 
-
 <head>
-    <title>Add a New Country</title>
+    <title>Contact Details</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -43,29 +42,9 @@
             padding: 10px;
         }
 
-        .btn {
-            color: #fff; /* Darker text color for better contrast */
-            font-size: 1.5rem; /* Larger font size */
-            font-weight: bold; /* Bold text */
-            padding: 14px 36px; /* Padding around text */
-            border-radius: 30px; /* Rounded corners */
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
 
         .btn-warning {
             background-color: #ffc107; /* Yellow background color */
-            border-color: #ffc107; /* Yellow border color */
-            color: #fff; /* Darker text color for better contrast */
-            font-size: 1.5rem; /* Larger font size */
-            font-weight: bold; /* Bold text */
-            padding: 14px 36px; /* Padding around text */
-            border-radius: 30px; /* Rounded corners */
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-
-        .btn-save {
-            background-color: #0741ff; /* Yellow background color */
             border-color: #ffc107; /* Yellow border color */
             color: #fff; /* Darker text color for better contrast */
             font-size: 1.5rem; /* Larger font size */
@@ -81,11 +60,6 @@
             color: #333; /* Darker text color on hover */
         }
 
-        .btn-save:hover {
-            background-color: #2009ff; /* Darker yellow on hover */
-            border-color: #ffca2c; /* Darker yellow border on hover */
-            color: #333; /* Darker text color on hover */
-        }
 
     </style>
 
@@ -100,57 +74,68 @@
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/index">Home</a></li>
                     <li><i class="fa fa-bars"></i><a href="/parameters">Parameters</a></li>
-                    <li><i class="fa fa-square-o"></i>Country Add</li>
+                    <li><i class="fa fa-square-o"></i>Contact Details</li>
                 </ol>
             </div>
         </div>
         <div class="container" style="width: 70%">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <form id="cform" class="form-horizontal" th:action="@{'/parameters/countryList'}" method="post">
+                    <form class="form-horizontal" th:action="@{'/parameters/contacts/'}"
+                          method="post">
                         <section class="panel">
                             <header class="panel-heading">
-                                Add New Country Record
+                                Contact Details
                             </header>
                             <div class="panel-body">
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4">Description</label>
+                                <div class="form-group row">
+                                    <label for="txtFirstnameAdd" class="control-label col-sm-4">Firstname</label>
                                     <div class="col-sm-6">
-                                        <input name="description" type="text" size="16" class="form-control">
+                                        <input type="text" th:value="${contact.firstname}"  class="form-control"
+                                               id="txtFirstnameAdd" name="firstname" disabled>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4">Capital</label>
+                                <div class="form-group row">
+                                    <label for="txtLastNameAdd" class="control-label col-sm-4">Lastname</label>
                                     <div class="col-sm-6">
-                                        <input name="capital" class="form-control" size="16" type="text">
+                                        <input type="text" th:value="${contact.lastname}"  class="form-control"
+                                               id="txtLastNameAdd" name="lastname" disabled>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4"> Nationality</label>
+                                <div class="form-group row">
+                                    <label for="txtEmailAdd" class="control-label col-sm-4">Email</label>
                                     <div class="col-sm-6">
-                                        <input name="nationality" type="text" class=" form-control"/>
+                                        <input type="text" th:value="${contact.email}"  class="form-control"
+                                               id="txtEmailAdd" name="email" disabled>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4">Continent</label>
-                                    <div class="col-sm-5">
-                                        <input name="continent" type="text" class="form-control">
+                                <div class="form-group row">
+                                    <label for="txtMobileAdd" class="control-label col-sm-4">Mobile</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" th:value="${contact.mobile}"  class="form-control"
+                                               id="txtMobileAdd" name="mobile" disabled>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4">Code</label>
-                                    <div class="col-sm-5">
-                                        <input name="code" type="text" class="form-control">
+                                <div class="form-group row">
+                                    <label for="txtPhoneAdd" class="control-label col-sm-4">Phone</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" th:value="${contact.phone}"  class="form-control"
+                                               id="txtPhoneAdd" name="phone" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="txtRemarksAdd" class="control-label col-sm-4">Remarks</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" th:value="${contact.remarks}"
+                                               readonly class="form-control" id="txtRemarksAdd" name="remarks">
                                     </div>
                                 </div>
                             </div>
                         </section>
+
                         <section class="panel">
                             <div class="panel-body">
-                                <button type="submit" class="btn btn-save">
-                                    Save
-                                </button>
-                                <a href="/countries" class="btn btn-warning">
+                                <a href="/contacts" class="btn btn-warning">
                                     Exit
                                 </a>
                             </div>
@@ -158,8 +143,10 @@
                     </form>
                 </div>
             </div>
+
         </div>
     </section>
 </div>
+
 </body>
 </html>
