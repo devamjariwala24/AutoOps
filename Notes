@@ -42,4 +42,21 @@ Properties and methods of a @MappedSuperclass are inherited by the entity subcla
 attributes and methods among multiple entity classes without repeating the code.
 
 <a> anchor tag generates a get request and as we have written a delete request, it will throw an error. to cater this,
- when submitting a form, use <form> tag.
+when submitting a form, use <form> tag.
+
+
+Understand the javascript coed used in clientEdit and supplierEdit files.
+
+When performing unit test, you have to use the following auto configuration:
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+this is because of the following reasons:
+1) When we use DataJpaTest, By default
+Spring Boot replaces the configured data source with an embedded in-memory database (H2 by default).
+
+This means that the test environment starts with an empty database schema, and we must must either use SQL scripts
+(data.sql or import.sql) or programmatically insert data for tests.
+
+When you specify replace = AutoConfigureTestDatabase.Replace.NONE, you are telling Spring Boot to not replace the
+configured data source. Instead, it uses the actual database configuration from your main application.
+This includes using the database URL, username, and password configured in your application.properties
+or application.yml.
