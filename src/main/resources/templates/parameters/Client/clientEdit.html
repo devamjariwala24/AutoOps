@@ -210,8 +210,9 @@
     <script>
         $(document).ready(function() {
             $('#ddlCountryAdd').change(function() {
-                console.log("Country changed to:", $(this).val());
-                loadStates($(this).val());
+                var selectedCountryId = $(this).val();
+                // console.log("Country changed to:", selectedCountryId);
+                loadStates(selectedCountryId);
             });
 
             var selectedStateId = $('#selectedStateId').val();
@@ -219,7 +220,7 @@
 
             function loadInitialStates() {
                 var selectedCountryId = $('#ddlCountryAdd').val();
-                console.log("Initial country ID:", selectedCountryId);
+                // console.log("Initial country ID:", selectedCountryId);
                 if (selectedCountryId) {
                     loadStates(selectedCountryId, selectedStateId);
                 } else {
@@ -228,51 +229,23 @@
             }
 
             function loadStates(countryId, selectedStateId = null) {
-                console.log("Loading states for this country ID:", countryId);
-                console.log("Selected state ID:", selectedStateId);
+                // console.log("Loading states for country ID:", countryId);
+                // console.log("Selected state ID:", selectedStateId);
 
                 $.ajax({
                     url: '/parameters/states/' + countryId,
                     method: 'GET',
                     success: function(states) {
-                        console.log("Received states:", JSON.stringify(states, null, 2));
+                        // console.log("Received states:", states);
 
                         var stateSelect = $('#ddlStateAdd');
-                        stateSelect.empty();
-                        stateSelect.append('<option>-SELECT-</option>');
-
-                        // Create a map of all states
-                        var stateMap = {};
-                        states.forEach(function(state) {
-                            if (typeof state === 'object' && state !== null) {
-                                stateMap[state.id] = state;
-                                // Also add states from the country object if they exist
-                                if (state.country && Array.isArray(state.country.states)) {
-                                    state.country.states.forEach(function(nestedState) {
-                                        if (typeof nestedState === 'object' && nestedState !== null) {
-                                            stateMap[nestedState.id] = nestedState;
-                                        }
-                                    });
-                                }
-                            }
-                        });
+                        stateSelect.empty().append('<option>-SELECT-</option>');
 
                         // Add states to the dropdown
                         states.forEach(function(state) {
-                            var stateObj;
-                            if (typeof state === 'object' && state !== null) {
-                                stateObj = state;
-                            } else if (typeof state === 'number') {
-                                stateObj = stateMap[state];
-                            }
-
-                            if (stateObj) {
-                                var selected = (selectedStateId && stateObj.id == selectedStateId) ? 'selected' : '';
-                                stateSelect.append('<option value="' + stateObj.id + '" ' + selected + '>' + stateObj.name + '</option>');
-                                console.log(`Added state: ${stateObj.name}`);
-                            } else {
-                                console.log(`Could not find state for:`, state);
-                            }
+                            var selected = (selectedStateId && state.id == selectedStateId) ? 'selected' : '';
+                            stateSelect.append('<option value="' + state.id + '" ' + selected + '>' + state.name + '</option>');
+                            // console.log("Added state:", state.name);
                         });
 
                         console.log("Final state select options:", stateSelect.html());
@@ -283,7 +256,6 @@
                     }
                 });
             }
-            loadInitialStates();
         });
     </script>
 </div>

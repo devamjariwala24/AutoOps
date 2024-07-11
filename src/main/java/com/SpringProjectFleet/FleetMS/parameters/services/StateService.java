@@ -33,28 +33,24 @@ public class StateService {
 
     public List<State> findByCountryId(Integer countryId) {
         List<State> states = stateRepository.findByCountryId(countryId);
-        System.out.println("Found " + states.size() + " states for country ID: " + countryId);
-        for (State state : states) {
-            System.out.println("State: " + state.getId() + " - " + state.getName());
-        }
+
         return states.stream()
-                .map(this::simplifyState)
+                .map(state -> {
+                    State simplifiedState = new State();
+                    simplifiedState.setId(state.getId());
+                    simplifiedState.setName(state.getName());
+                    simplifiedState.setCapital(state.getCapital());
+                    simplifiedState.setCode(state.getCode());
+                    simplifiedState.setDetails(state.getDetails());
+                    Country simplifiedCountry = new Country();
+                    simplifiedCountry.setId(state.getCountry().getId());
+                    simplifiedState.setCountry(simplifiedCountry);
+
+                    return simplifiedState;
+                })
                 .collect(Collectors.toList());
     }
 
-    private State simplifyState(State state) {
-        State simplifiedState = new State();
-        simplifiedState.setId(state.getId());
-        simplifiedState.setName(state.getName());
-        simplifiedState.setCapital(state.getCapital());
-        simplifiedState.setCode(state.getCode());
-        simplifiedState.setDetails(state.getDetails());
-        // Set a simplified country object to avoid circular references
-        Country simplifiedCountry = new Country();
-        simplifiedCountry.setId(state.getCountry().getId());
-        simplifiedState.setCountry(simplifiedCountry);
-        return simplifiedState;
-    }
     public void save( State state) {
         stateRepository.save(state);
     }
