@@ -50,7 +50,7 @@ Understand the javascript coed used in clientEdit and supplierEdit files.
 When performing unit test, you have to use the following auto configuration:
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 this is because of the following reasons:
-1) When we use DataJpaTest, By default
+When we use DataJpaTest, By default
 Spring Boot replaces the configured data source with an embedded in-memory database (H2 by default).
 
 This means that the test environment starts with an empty database schema, and we must must either use SQL scripts
