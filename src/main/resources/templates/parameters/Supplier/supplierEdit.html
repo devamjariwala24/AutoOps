@@ -3,11 +3,12 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <title>Edit this Client</title>
+    <title>Edit this Supplier</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -94,45 +95,45 @@
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/index">Home</a></li>
                     <li><i class="fa fa-bars"></i><a href="/parameters">Parameters</a></li>
-                    <li><i class="fa fa-square-o"></i>Client Edit</li>
+                    <li><i class="fa fa-square-o"></i>Supplier Edit</li>
                 </ol>
             </div>
         </div>
         <div class="container" style="width: 70%">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <form class="form-horizontal" th:action="@{'/client/update/' + ${client.id}}" method="post">
+                    <form class="form-horizontal" th:action="@{'/supplier/update/' + ${supplier.id}}" method="post">
                         <section class="panel">
                             <header class="panel-heading">
-                                Edit Client Record
+                                Edit Supplier Record
                             </header>
                             <div class="panel-body">
                                 <div class="col-lg-6">
                                     <div class="form-group row">
                                         <label for="txtNameAdd" class="control-label col-sm-4">Name</label>
                                         <div class="col-sm-6">
-                                            <input type="text" th:value="${client.name}" class="form-control"
+                                            <input type="text" th:value="${supplier.name}" class="form-control"
                                                    id="txtNameAdd" name="name" placeholder="Name" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="txtEmailAdd" class="control-label col-sm-4">Email</label>
                                         <div class="col-sm-6">
-                                            <input type="email" th:value="${client.email}" class="form-control"
+                                            <input type="email" th:value="${supplier.email}" class="form-control"
                                                    id="txtEmailAdd" name="email" placeholder="Email" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="txtWebsiteAdd" class="control-label col-sm-4">Website</label>
                                         <div class="col-sm-6">
-                                            <input type="text" th:value="${client.website}" class="form-control"
+                                            <input type="text" th:value="${supplier.website}" class="form-control"
                                                    id="txtWebsiteAdd" name="website" placeholder="Website" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="txtAddressAdd" class="control-label col-sm-4">Address</label>
                                         <div class="col-sm-6">
-                                            <textarea class="form-control" th:text="${client.address}"
+                                            <textarea class="form-control" th:text="${supplier.address}"
                                                       id="txtAddressAdd" name="address" placeholder="Address"
                                                       rows="2" required></textarea>
                                         </div>
@@ -146,7 +147,7 @@
                                                 <option>-SELECT-</option>
                                                 <option th:each="country : ${countries}"
                                                         th:value="${country.id}"
-                                                        th:selected="${country.id} == ${client.country.id}"
+                                                        th:selected="${country.id} == ${supplier.country.id}"
                                                         th:text="${country.description}">
                                                 </option>
                                             </select>
@@ -163,28 +164,28 @@
                                     <div class="form-group row">
                                         <label for="txtCityAdd" class="control-label col-sm-4">City</label>
                                         <div class="col-sm-6">
-                                            <input type="text" th:value="${client.city}" class="form-control"
+                                            <input type="text" th:value="${supplier.city}" class="form-control"
                                                    id="txtCityAdd" name="city" placeholder="City" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="txtPhoneAdd" class="control-label col-sm-4">Phone</label>
                                         <div class="col-sm-6">
-                                            <input type="text" th:value="${client.phone}" class="form-control"
+                                            <input type="text" th:value="${supplier.phone}" class="form-control"
                                                    id="txtPhoneAdd" name="phone" placeholder="Phone" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="txtMobileAdd" class="control-label col-sm-4">Mobile</label>
                                         <div class="col-sm-6">
-                                            <input type="text" th:value="${client.mobile}" class="form-control"
+                                            <input type="text" th:value="${supplier.mobile}" class="form-control"
                                                    id="txtMobileAdd" name="mobile" placeholder="Mobile" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="txtDetailsAdd" class="control-label col-sm-4">Details</label>
                                         <div class="col-sm-6">
-                                            <input type="text" th:value="${client.details}" class="form-control"
+                                            <input type="text" th:value="${supplier.details}" class="form-control"
                                                    id="txtDetailsAdd" name="details" placeholder="Details" required>
                                         </div>
                                     </div>
@@ -196,7 +197,7 @@
                                 <button type="submit" class="btn btn-save">
                                     Save
                                 </button>
-                                <a href="/clients" class="btn btn-warning">
+                                <a href="/suppliers" class="btn btn-warning">
                                     Exit
                                 </a>
                             </div>
@@ -206,12 +207,11 @@
             </div>
         </div>
     </section>
-    <input type="hidden" id="selectedStateId" th:value="${client.state.id}">
+    <input type="hidden" id="selectedStateId" th:value="${supplier.state.id}">
     <script>
         $(document).ready(function() {
             $('#ddlCountryAdd').change(function() {
                 var selectedCountryId = $(this).val();
-                // console.log("Country changed to:", selectedCountryId);
                 loadStates(selectedCountryId);
             });
 
@@ -220,7 +220,6 @@
 
             function loadInitialStates() {
                 var selectedCountryId = $('#ddlCountryAdd').val();
-                // console.log("Initial country ID:", selectedCountryId);
                 if (selectedCountryId) {
                     loadStates(selectedCountryId, selectedStateId);
                 } else {
@@ -229,15 +228,10 @@
             }
 
             function loadStates(countryId, selectedStateId = null) {
-                // console.log("Loading states for country ID:", countryId);
-                // console.log("Selected state ID:", selectedStateId);
-
                 $.ajax({
                     url: '/parameters/states/' + countryId,
                     method: 'GET',
                     success: function(states) {
-                        // console.log("Received states:", states);
-
                         var stateSelect = $('#ddlStateAdd');
                         stateSelect.empty().append('<option>-SELECT-</option>');
 
@@ -245,10 +239,7 @@
                         states.forEach(function(state) {
                             var selected = (selectedStateId && state.id == selectedStateId) ? 'selected' : '';
                             stateSelect.append('<option value="' + state.id + '" ' + selected + '>' + state.name + '</option>');
-                            // console.log("Added state:", state.name);
                         });
-
-                        // console.log("Final state select options:", stateSelect.html());
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.error("AJAX error:", textStatus, errorThrown);

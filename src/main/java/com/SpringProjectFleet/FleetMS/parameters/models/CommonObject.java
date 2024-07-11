@@ -54,7 +54,8 @@ public class CommonObject{
 
 	@Override
 	public String toString() {
-		return "CommonObject [id=" + id + ", description=" + description + ", details=" + details + "]";
+//		return "CommonObject [id=" + id + ", description=" + description + ", details=" + details + "]";
+		return STR."CommonObject [id=\{id}, description=\{description}, details=\{details}]";
 	}
 	
 	

@@ -2,9 +2,11 @@ package com.SpringProjectFleet.FleetMS.parameters.controllers;
 
 import com.SpringProjectFleet.FleetMS.parameters.models.Client;
 import com.SpringProjectFleet.FleetMS.parameters.models.State;
+import com.SpringProjectFleet.FleetMS.parameters.models.Supplier;
 import com.SpringProjectFleet.FleetMS.parameters.services.ClientService;
 import com.SpringProjectFleet.FleetMS.parameters.services.CountryService;
 import com.SpringProjectFleet.FleetMS.parameters.services.StateService;
+import com.SpringProjectFleet.FleetMS.parameters.services.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
@@ -14,10 +16,10 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 import java.util.List;
 
 @Controller
-public class ClientController {
+public class SupplierController {
 
     @Autowired
-    private ClientService clientService;
+    private SupplierService supplierService;
 
     @Autowired
     private CountryService countryService;
@@ -26,73 +28,67 @@ public class ClientController {
     private StateService stateService;
 
     public Model addModelAttributes(Model model){
-        model.addAttribute("clients", clientService.findAll());
+        model.addAttribute("suppliers", supplierService.findAll());
         model.addAttribute("countries", countryService.findAll());
         model.addAttribute("states", stateService.findAll());
         return model;
     }
 
-    @GetMapping("/clients")
+    @GetMapping("/suppliers")
     public String findAllClientData(Model model){
         addModelAttributes(model);
-        return "/parameters/Client/clients";
+        return "/parameters/Supplier/suppliers";
     }
 
-    @GetMapping("/clientAdd")
+    @GetMapping("/supplierAdd")
     public String addClientFromClientsPage(Model model){
         addModelAttributes(model);
-        return "/parameters/Client/clientAdd";
+        return "/parameters/Supplier/supplierAdd";
     }
 
-    @PostMapping("/parameters/clientAdd")
-    public String saveClientFromClientAddPage(Client client){
-        clientService.save(client);
-        return "redirect:/clients";
+    @PostMapping("/parameters/supplierAdd")
+    public String saveClientFromClientAddPage(Supplier supplier){
+        supplierService.save(supplier);
+        return "redirect:/suppliers";
     }
 
-    @GetMapping("/clientDetails{id}")
+    @GetMapping("/supplierDetails{id}")
     public String detailsClientFromClientsPage(@PathVariable Integer id, Model model){
         addModelAttributes(model);
-        model.addAttribute("client", clientService.findById(id));
-        return "/parameters/Client/clientDetails";
+        model.addAttribute("supplier", supplierService.findById(id));
+        return "/parameters/Supplier/supplierDetails";
     }
 
-    @GetMapping("/clientEdit{id}")
+    @GetMapping("/supplierEdit{id}")
     public String editClientFromClientsPage(@PathVariable Integer id, Model model){
-        Client client = clientService.findById(id);
-        model.addAttribute("client", client);
+        Supplier supplier = supplierService.findById(id);
+        model.addAttribute("supplier", supplier);
         model.addAttribute("countries", countryService.findAll());
-        if (client.getCountry() != null) {
-            model.addAttribute("selectedCountryId", client.getCountry().getId());
+        if (supplier.getCountry() != null) {
+            model.addAttribute("selectedCountryId", supplier.getCountry().getId());
         }
-        if (client.getState() != null) {
-            model.addAttribute("selectedStateId", client.getState().getId());
+        if (supplier.getState() != null) {
+            model.addAttribute("selectedStateId", supplier.getState().getId());
         }
-        return "/parameters/Client/clientEdit";
+        return "/parameters/Supplier/supplierEdit";
     }
 
 
-    @PostMapping(value = "/client/update/{id}")
-    public String saveClientFromClientEditPage(Client client){
-        clientService.save(client);
-        return "redirect:/clients";
+    @PostMapping(value = "/supplier/update/{id}")
+    public String saveClientFromClientEditPage(Supplier supplier){
+        supplierService.save(supplier);
+        return "redirect:/suppliers";
     }
 
-    @DeleteMapping(value="/client/delete/{id}")
+    @DeleteMapping(value="/supplier/delete/{id}")
     public String delete(@PathVariable Integer id) {
-        clientService.deleteById(id);
-        return "redirect:/clients";
-    }
-
-    @GetMapping("/parameters/states/{countryId}")
-    @ResponseBody
-    public List<State> getStatesByCountry(@PathVariable Integer countryId) {
-        return stateService.findByCountryId(countryId);
+        supplierService.deleteById(id);
+        return "redirect:/suppliers";
     }
 
 
     @Bean
-    public HiddenHttpMethodFilter hiddenClientHttpMethodFilter() {
+    public HiddenHttpMethodFilter hiddenSupplierHttpMethodFilter() {
         return new HiddenHttpMethodFilter();
     }
 
