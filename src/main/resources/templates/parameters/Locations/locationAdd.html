@@ -117,20 +117,20 @@
                             </header>
                             <div class="panel-body">
                                     <div class="form-group row">
-                                        <label class="col-form-label col-sm-4">Description:</label>
+                                        <label class="control-label col-sm-4">Description</label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control" id="descriptionAdd"
                                                    name="description">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="cityAdd" class="col-form-label col-sm-4">City:</label>
+                                        <label for="cityAdd" class="control-label col-sm-4">City</label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control" id="cityAdd" name="city">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="detailsAdd" class="col-form-label col-sm-4">Address:</label>
+                                        <label for="detailsAdd" class="control-label col-sm-4">Address</label>
                                         <div class="col-sm-6">
                                         <textarea type="text" class="form-control" id="addressAdd" name="address">
 
@@ -138,7 +138,7 @@
                                         </div>
                                     </div>
                                 <div class="form-group row">
-                                    <label for="ddlCountryAdd" class="col-form-label col-sm-4">Country: </label>
+                                    <label for="ddlCountryAdd" class="control-label col-sm-4">Country</label>
                                     <div class="col-sm-6">
                                         <select class="form-control" id="ddlCountryAdd" name="countryid">
                                             <option th:value="${null}">-SELECT-</option>
@@ -150,7 +150,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="ddlStateAdd" class="col-form-label col-sm-4">State: </label>
+                                    <label for="ddlStateAdd" class="control-label col-sm-4">State</label>
                                     <div class="col-sm-6">
                                         <select class="form-control" id="ddlStateAdd" name="stateid">
                                             <option value="">-SELECT-</option>
@@ -158,7 +158,7 @@
                                     </div>
                                 </div>
                                     <div class="form-group">
-                                        <label for="detailsAdd" class="col-form-label col-sm-4">Details:</label>
+                                        <label for="detailsAdd" class="control-label col-sm-4">Details</label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control" id="detailsAdd" name="details">
                                         </div>
@@ -186,9 +186,7 @@
             $('#ddlCountryAdd').on('change', function () {
                 var countryId = $(this).val();
                 var stateSelect = $('#ddlStateAdd');
-
                 stateSelect.empty().append('<option value="">-SELECT-</option>');
-
                 if (countryId) {
                     $.ajax({
                         url: "/parameters/country/" + countryId,

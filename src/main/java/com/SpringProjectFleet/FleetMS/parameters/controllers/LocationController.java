@@ -18,8 +18,12 @@ public class LocationController {
 
     @Autowired
     private LocationService locationService;
-    @Autowired	private CountryService countryService;
-    @Autowired	private StateService stateService;
+
+    @Autowired
+    private CountryService countryService;
+
+    @Autowired
+    private StateService stateService;
 
     public Model addModelAttributes(Model model){
         model.addAttribute("locations", locationService.findAll());
@@ -40,7 +44,14 @@ public class LocationController {
         return "/parameters/Locations/locationAdd";
     }
 
-    //The op parameter is either Edit or Details
+    @GetMapping("/locationDetails{id}")
+    public String detailLocation(@PathVariable Integer id, Model model){
+        addModelAttributes(model);
+        model.addAttribute("location", locationService.findById(id));
+        return "/parameters/Locations/locationDetails";
+    }
+
+
     @GetMapping("/locationEdit{id}")
     public String editLocation(@PathVariable Integer id, Model model){
         addModelAttributes(model);
@@ -48,11 +59,10 @@ public class LocationController {
         return "/parameters/Locations/locationEdit";
     }
 
-    @GetMapping("/locationDetails{id}")
-    public String detailLocation(@PathVariable Integer id, Model model){
-        addModelAttributes(model);
-        model.addAttribute("location", locationService.findById(id));
-        return "/parameters/Locations/locationDetails";
+    @PostMapping(value = "/location/update/{id}")
+    public String updateLocationFromLocationEditPage(Location location){
+        locationService.save(location);
+        return "redirect:/locations";
     }
 
     @PostMapping("/locations")
@@ -64,11 +74,6 @@ public class LocationController {
     @DeleteMapping(value="/location/delete/{id}")
     public String delete(@PathVariable Integer id) {
         locationService.deleteById(id);
-        return "redirect:/locations";
-    }
-    @PostMapping(value = "/location/update/{id}")
-    public String updateLocationFromLocationEditPage(Location location){
-        locationService.save(location);
         return "redirect:/locations";
     }
 

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Edit this Client</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .wrapper {
+            margin-top: 60px;
+        }
+
+        .panel {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .panel-heading {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .panel-body {
+            padding: 10px;
+        }
+
+        .btn {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 8px 24px;
+            border-radius: 30px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 14px 36px;
+            border-radius: 30px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-save {
+            background-color: #0741ff;
+            border-color: #ffc107;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 14px 36px;
+            border-radius: 30px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-warning:hover {
+            background-color: #ffca2c;
+            border-color: #ffca2c;
+            color: #333;
+        }
+
+        .btn-save:hover {
+            background-color: #2009ff;
+            border-color: #ffca2c;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/index">Home</a></li>
+                    <li><i class="fa fa-bars"></i><a href="/parameters">Parameters</a></li>
+                    <li><i class="fa fa-square-o"></i>Client Edit</li>
+                </ol>
+            </div>
+        </div>
+        <div class="container" style="width: 70%">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <form class="form-horizontal" th:action="@{'/client/update/' + ${client.id}}" method="post">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Edit Client Record
+                            </header>
+                            <div class="panel-body">
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <label for="txtNameAdd" class="control-label col-sm-4">Name</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" th:value="${client.name}" class="form-control"
+                                                   id="txtNameAdd" name="name" placeholder="Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="txtEmailAdd" class="control-label col-sm-4">Email</label>
+                                        <div class="col-sm-6">
+                                            <input type="email" th:value="${client.email}" class="form-control"
+                                                   id="txtEmailAdd" name="email" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="txtWebsiteAdd" class="control-label col-sm-4">Website</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" th:value="${client.website}" class="form-control"
+                                                   id="txtWebsiteAdd" name="website" placeholder="Website">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="txtAddressAdd" class="control-label col-sm-4">Address</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" th:text="${client.address}"
+                                                      id="txtAddressAdd" name="address" placeholder="Address"
+                                                      rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <label for="ddlCountryAdd" class="control-label col-sm-4">Country</label>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" id="ddlCountryAdd" name="countryid">
+                                                <option>-SELECT-</option>
+                                                <option th:each="country : ${countries}"
+                                                        th:value="${country.id}"
+                                                        th:selected="${country.id} == ${client.country.id}"
+                                                        th:text="${country.description}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="ddlStateAdd" class="control-label col-sm-4">State/Province</label>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" id="ddlStateAdd" name="stateid">
+                                                <option>-SELECT-</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="txtCityAdd" class="control-label col-sm-4">City</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" th:value="${client.city}" class="form-control"
+                                                   id="txtCityAdd" name="city" placeholder="City">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="txtPhoneAdd" class="control-label col-sm-4">Phone</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" th:value="${client.phone}"
+                                                   class="form-control" id="txtPhoneAdd" name="phone" placeholder="Phone">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="txtMobileAdd" class="control-label col-sm-4">Mobile</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" th:value="${client.mobile}" class="form-control"
+                                                   id="txtMobileAdd" name="mobile" placeholder="Mobile">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="txtDetailsAdd" class="control-label col-sm-4">Details</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" th:value="${client.details}" class="form-control"
+                                                   id="txtDetailsAdd" name="details" placeholder="Details">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="panel">
+                            <div class="panel-body">
+                                <button type="submit" class="btn btn-save">
+                                    Save
+                                </button>
+                                <a href="/clients" class="btn btn-warning">
+                                    Exit
+                                </a>
+                            </div>
+                        </section>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <input type="hidden" id="selectedStateId" th:value="${client.state.id}">
+    <script>
+        $(document).ready(function() {
+            $('#ddlCountryAdd').change(function() {
+                console.log("Country changed to:", $(this).val());
+                loadStates($(this).val());
+            });
+
+            var selectedStateId = $('#selectedStateId').val();
+            loadInitialStates();
+
+            function loadInitialStates() {
+                var selectedCountryId = $('#ddlCountryAdd').val();
+                console.log("Initial country ID:", selectedCountryId);
+                if (selectedCountryId) {
+                    loadStates(selectedCountryId, selectedStateId);
+                } else {
+                    console.log("No initial country selected");
+                }
+            }
+
+            function loadStates(countryId, selectedStateId = null) {
+                console.log("Loading states for this country ID:", countryId);
+                console.log("Selected state ID:", selectedStateId);
+
+                $.ajax({
+                    url: '/parameters/states/' + countryId,
+                    method: 'GET',
+                    success: function(states) {
+                        console.log("Received states:", JSON.stringify(states, null, 2));
+
+                        var stateSelect = $('#ddlStateAdd');
+                        stateSelect.empty();
+                        stateSelect.append('<option>-SELECT-</option>');
+
+                        // Create a map of all states
+                        var stateMap = {};
+                        states.forEach(function(state) {
+                            if (typeof state === 'object' && state !== null) {
+                                stateMap[state.id] = state;
+                                // Also add states from the country object if they exist
+                                if (state.country && Array.isArray(state.country.states)) {
+                                    state.country.states.forEach(function(nestedState) {
+                                        if (typeof nestedState === 'object' && nestedState !== null) {
+                                            stateMap[nestedState.id] = nestedState;
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                        // Add states to the dropdown
+                        states.forEach(function(state) {
+                            var stateObj;
+                            if (typeof state === 'object' && state !== null) {
+                                stateObj = state;
+                            } else if (typeof state === 'number') {
+                                stateObj = stateMap[state];
+                            }
+
+                            if (stateObj) {
+                                var selected = (selectedStateId && stateObj.id == selectedStateId) ? 'selected' : '';
+                                stateSelect.append('<option value="' + stateObj.id + '" ' + selected + '>' + stateObj.name + '</option>');
+                                console.log(`Added state: ${stateObj.name}`);
+                            } else {
+                                console.log(`Could not find state for:`, state);
+                            }
+                        });
+
+                        console.log("Final state select options:", stateSelect.html());
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error("AJAX error:", textStatus, errorThrown);
+                        console.error("Response Text:", jqXHR.responseText);
+                    }
+                });
+            }
+            loadInitialStates();
+        });
+    </script>
+</div>
+
+</body>
+</html>
