@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
+import java.util.List;
+
 @Controller
 public class LocationController {
 
@@ -75,6 +77,13 @@ public class LocationController {
     public String delete(@PathVariable Integer id) {
         locationService.deleteById(id);
         return "redirect:/locations";
+    }
+
+    @GetMapping("/location/states/{countryId}")
+    @ResponseBody
+    public List<State> getStatesByCountry(@PathVariable Integer countryId) {
+        // Retrieve states by countryId from your service
+        return stateService.findByCountryId(countryId);
     }
 
     @Bean

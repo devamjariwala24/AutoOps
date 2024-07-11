@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -149,12 +150,7 @@
                                         <label for="ddlStateAdd" class="control-label col-sm-4">State</label>
                                         <div class="col-sm-6">
                                             <select class="form-control" id="ddlStateAdd" name="stateid">
-                                                <option th:value="${null}">-SELECT-</option>
-                                                <option th:each="state : ${states}"
-                                                        th:value="${state.id}"
-                                                        th:selected="${state.id} == ${location.stateid}?True: False"
-                                                        th:text="${state.name}">
-                                                </option>
+                                                <option>-SELECT-</option>
                                             </select>
                                         </div>
                                     </div>
@@ -183,6 +179,59 @@
             </div>
         </div>
     </section>
+    <input type="hidden" id="selectedStateId" th:value="${location.state.id}">
+    <script>
+        $(document).ready(function() {
+            $('#ddlCountryAdd').change(function() {
+                var selectedCountryId = $(this).val();
+                // console.log("Country changed to:", selectedCountryId);
+                loadStates(selectedCountryId);
+            });
+
+            var selectedStateId = $('#selectedStateId').val();
+            loadInitialStates();
+
+            function loadInitialStates() {
+                var selectedCountryId = $('#ddlCountryAdd').val();
+                // console.log("Initial country ID:", selectedCountryId);
+                if (selectedCountryId) {
+                    loadStates(selectedCountryId, selectedStateId);
+                } else {
+                    console.log("No initial country selected");
+                }
+            }
+
+            function loadStates(countryId, selectedStateId = null) {
+                // console.log("Loading states for country ID:", countryId);
+                // console.log("Selected state ID:", selectedStateId);
+
+                $.ajax({
+                    url: '/parameters/states/' + countryId,
+                    method: 'GET',
+                    success: function(states) {
+                        // console.log("Received states:", states);
+
+                        var stateSelect = $('#ddlStateAdd');
+                        stateSelect.empty().append('<option>-SELECT-</option>');
+
+                        // Add states to the dropdown
+                        states.forEach(function(state) {
+                            var selected = (selectedStateId && state.id == selectedStateId) ? 'selected' : '';
+                            stateSelect.append('<option value="' + state.id + '" ' + selected + '>' + state.name + '</option>');
+                            // console.log("Added state:", state.name);
+                        });
+
+                        // console.log("Final state select options:", stateSelect.html());
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error("AJAX error:", textStatus, errorThrown);
+                        console.error("Response Text:", jqXHR.responseText);
+                    }
+                });
+            }
+        });
+    </script>
+
 </div>
 </body>
 </html>
