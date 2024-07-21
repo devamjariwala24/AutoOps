@@ -21,8 +21,8 @@ public class VehicleTypeService {
     }
 
     //Get VehicleType By Id
-    public Optional<VehicleType> findById(int id) {
-        return vehicleTypeRepository.findById(id);
+    public VehicleType findById(Integer id) {
+        return vehicleTypeRepository.findById(id).orElse(null);
     }
 
     //Delete VehicleType
