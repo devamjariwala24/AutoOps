@@ -4,7 +4,7 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Vehicle Types</title>
+    <title>Vehicles</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -109,8 +109,8 @@
             <div class="col-lg-12">
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/index">Home</a></li>
-                    <li><i class="fa fa-bars"></i><a href="/fleet">Fleet</a></li>
-                    <li><i class="fa fa-square-o"></i>Vehicle Types</li>
+                    <li><i class="fa fa-bars"></i><a href="/fleet">Fleet Home</a></li>
+                    <li><i class="fa fa-square-o"></i>Vehicle List</li>
                 </ol>
             </div>
         </div>
@@ -118,55 +118,76 @@
             <div class="col-lg-12">
                 <section class="panel" style="margin-bottom: 0px;">
                     <div class="panel-body">
-                        <a href="/addNewVehicleTypeRecord" class="btn btn-new-state">
-                            Add New Vehicle Type
+                        <a href="/addNewVehicleRecord" class="btn btn-new-state">
+                            Add New Vehicle
                         </a>
                     </div>
                 </section>
                 <section class="panel">
                     <header class="panel-heading" style="padding: 10px">
-                        Vehicle Type List
+                        Vehicle
                     </header>
 
                     <table class="table table-bordered table-striped table-advance table-hover">
                         <thead>
                         <tr>
                             <th><i class="fa fa-list-ol"></i> Index</th>
-                            <th><i class="icon_table"></i> Description</th>
-                            <th><i class="icon_table"></i> Details</th>
+                            <th><i class="fa fa-camera"></i> Photo</th>
+                            <th><i class="icon_profile"></i> Name</th>
+                            <th><i class="icon_calendar"></i> Description</th>
+                            <th><i class="icon_mail_alt"></i> Acquisition Date</th>
                             <th><i class="icon_cogs"></i> Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="vehicleType, index : ${vehicleTypes}">
+                        <tr th:each="vehicle, index : ${vehicles}">
                             <td th:text="${index.index + 1}"><i class="fa fa-table"></i></td>
-                            <td th:text="${vehicleType.description}">City</td>
-                            <td th:text="${vehicleType.details}">State</td>
+                            <td>
+                                <a id="photoButton" th:href="@{'/img/vehicles/' + ${vehicle.id} + '.jpg'}">
+                                    <img th:src="@{'/img/vehicles/' + ${vehicle.id} +'.jpg'}" width="40" height="40">
+                                </a>
+                            </td>
+                            <td th:text="${vehicle.name}">Name</td>
+                            <td th:text="${vehicle.description}">Description</td>
+                            <td th:text="${vehicle.acquisitionDate}">Acquisition Date</td>
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn btn-primary"
-                                       th:href="@{'/vehicleTypeDetails' + ${vehicleType.id}}">
-                                        <i class="icon_document_alt"></i></a>
-                                    <a class="btn btn-success"
-                                       th:href="@{'/vehicleTypeEdit' + ${vehicleType.id}}">
-                                        <i class="icon_pencil-edit"></i></a>
-                                    <form th:action="@{'/vehicleType/delete/' + ${vehicleType.id}}"
-                                          method="post" style="display:inline;">
-                                        <input type="hidden" name="_method" value="DELETE"/>
-                                        <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Are you sure you want to delete this record?')">
-                                            <i class="icon_close_alt2"></i>
-                                        </button>
-                                    </form>
+                                    <a class="btn btn-success" id="detailsButton"
+                                       th:href="@{'/vehicleDetails'+${vehicle.id}}"><i
+                                            class="icon_document_alt"></i></a>
+                                    <a class="btn btn-primary" id="editButton"
+                                       th:href="@{'/vehicleEdit'+${vehicle.id}}"><i
+                                            class="icon_pencil-edit"></i></a>
+                                    <a class="btn btn-danger" id="deleteButton"
+                                       onclick="return confirm('Are you sure you want to delete this record?')"
+                                       th:href="@{'/vehicle/delete/'+${vehicle.id}}">
+                                        <i class="icon_close_alt2"></i></a>
                                 </div>
                             </td>
                         </tr>
                         </tbody>
                     </table>
+                    <div class="panel-footer" style="padding: 10px">
+                        Number of Records: <span th:text="${#lists.size(vehicles)}">0</span>
+                    </div>
                 </section>
             </div>
         </div>
+        <!--Content of the page-->
     </section>
+
+    <script language="JavaScript">
+        $('document').ready(function () {
+            $('.table #photoButton').on('click', function (event) {
+                event.preventDefault();
+                var href = $(this).attr('href');
+                $('#photoModal #vehiclePhoto').attr('src', href);
+                $('#photoModal').modal();
+            })
+        })
+    </script>
+
 </div>
+
 </body>
 </html>
