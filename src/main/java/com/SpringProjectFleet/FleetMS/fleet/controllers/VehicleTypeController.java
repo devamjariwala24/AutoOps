@@ -23,10 +23,10 @@ public class VehicleTypeController {
     }
 
     @GetMapping("/vehicleTypeDetails{id}")
-    public String detailLocation(@PathVariable Integer id, Model model){
+    public String detailVehicleType(@PathVariable Integer id, Model model){
         VehicleType vehicleType = vehicleTypeService.findById(id);
         model.addAttribute("vehicleType",vehicleType);
-        return "vehicleTypeDetails";
+        return "/fleet/VehicleTypes/vehicleTypeDetails";
     }
 
     @GetMapping("/addNewVehicleTypeRecord")
@@ -59,7 +59,6 @@ public class VehicleTypeController {
         vehicleTypeService.save(vehicleType);
         return "redirect:/vehicleTypes";
     }
-
 
     @Bean
     public HiddenHttpMethodFilter hiddenHttpMethodFilterForVehicleType() {
