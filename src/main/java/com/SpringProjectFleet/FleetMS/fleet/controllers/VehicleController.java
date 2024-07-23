@@ -23,7 +23,7 @@ public class VehicleController {
     }
 
     @GetMapping("/vehicleDetails{id}")
-    public String detailLocation(@PathVariable Integer id, Model model){
+    public String detailVehicles(@PathVariable Integer id, Model model){
         Vehicle vehicle = vehicleService.findById(id);
         model.addAttribute("vehicle",vehicle);
         return "/fleet/Vehicle/vehicleDetails";
