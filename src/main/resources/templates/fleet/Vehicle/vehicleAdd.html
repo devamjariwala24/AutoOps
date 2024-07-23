@@ -95,7 +95,7 @@
             <div class="col-lg-12">
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/fleet">Home</a></li>
-                    <li><i class="fa fa-bars"></i><a href="/fleet/vehicles">Vehicle List</a></li>
+                    <li><i class="fa fa-bars"></i><a href="/vehicles">Vehicle List</a></li>
                     <li><i class="fa fa-square-o"></i>Vehicle Add</li>
                 </ol>
             </div>
@@ -247,7 +247,7 @@
                                                 <option th:value="${null}">-SELECT-</option>
                                                 <option th:each="vehicleStatus : ${vehicleStatuses}"
                                                         th:value="${vehicleStatus.id}"
-                                                        th:text="${vehicleStatus.description}">
+                                                        th:text="${vehicleStatus.details}">
                                                 </option>
                                             </select>
                                         </div>

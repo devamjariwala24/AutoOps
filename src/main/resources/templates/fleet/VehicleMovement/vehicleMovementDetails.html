@@ -2,122 +2,153 @@
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
+<head>
+    <title>Vehicle Movement Details</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .wrapper {
+            margin-top: 60px; /* Increase margin-top to create more space from the header */
+        }
+
+        .panel {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .panel-heading {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            font-size: 1.5rem; /* Increase heading font size */
+            font-weight: 700; /* Make heading font bolder */
+        }
+
+        .panel-body {
+            padding: 10px;
+        }
+
+
+        .btn-warning {
+            background-color: #ffc107; /* Yellow background color */
+            border-color: #ffc107; /* Yellow border color */
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-warning:hover {
+            background-color: #ffca2c; /* Darker yellow on hover */
+            border-color: #ffca2c; /* Darker yellow border on hover */
+            color: #333; /* Darker text color on hover */
+        }
+
+
+    </style>
+
+</head>
 <body>
-
 <div layout:fragment="content">
     <section class="wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="page-header"><i class="fa fa fa-bars"></i> Vehicle Movement Details</h3>
                 <ol class="breadcrumb">
-                    <li><i class="fa fa-home"></i><a href="/fleet">Home</a></li>
-                    <li><i class="fa fa-bars"></i><a href="/fleet/movements">Vehicle Movement List</a></li>
+                    <li><i class="fa fa-home"></i><a href="/fleet">Fleet</a></li>
+                    <li><i class="fa fa-bars"></i><a href="/vehicleMovement">Vehicle Movement List</a></li>
                     <li><i class="fa fa-square-o"></i>Vehicle Movement Details</li>
                 </ol>
             </div>
         </div>
         <div class="container" style="width: 70%">
             <div class="row justify-content-center">
-                <form class="form-horizontal">
-                    <div class="row justify-content-center white-bg">
+                <div class="col-lg-12">
+                    <form class="form-horizontal" th:action="@{'/vehicleMovement'}" method="post">
                         <section class="panel">
                             <header class="panel-heading">
                                 Vehicle Movement Details
                             </header>
-                            <br>
-                            <div class="col-lg-6">
-                                <section class="panel">
+                            <div class="panel-body">
+                                <div class="col-lg-6">
                                     <div class="form-group row">
-                                        <label for="idAdd" class="col-sm-4 col-form-label">Id:</label>
+                                        <label class="col-form-label col-sm-4">Vehicle </label>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control" th:value="${movement.id}" id="idAdd"
-                                                   name="id" readonly>
+                                            <input type="text" th:field="${vehicleMovement.vehicle.name}"
+                                                   class="form-control"
+                                                   name="vehicleid" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="ddlVehicleAdd" class="col-form-label col-sm-4">Vehicle: </label>
-                                        <div class="col-sm-6">
-                                            <select class="form-control" id="ddlVehicleAdd" name="vehicleid" readonly>
-                                                <option th:value="${null}">-SELECT-</option>
-                                                <option th:each="vehicle : ${vehicles}"
-                                                        th:selected="${vehicle.id}==${movement.vehicleid}?True:False"
-                                                        th:value="${vehicle.id}"
-                                                        th:text="${vehicle.name}">
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="ddlLocation1Add" class="col-form-label col-sm-4">Departed
+                                        <label class="col-form-label col-sm-4">Departed
                                             from: </label>
                                         <div class="col-sm-6">
-                                            <select class="form-control" id="ddlLocation1Add" name="locationid1"
-                                                    readonly>
-                                                <option th:value="${null}">-SELECT-</option>
-                                                <option th:each="location : ${locations}"
-                                                        th:value="${location.id} ==${movement.locationid1}"
-                                                        th:text="${location.description}">
-                                                </option>
-                                            </select>
+                                            <input type="text" th:field="${vehicleMovement.location1.details}"
+                                                   class="form-control"
+                                                   name="locationid1" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="date1Add" class="col-form-label col-sm-4">Departure Date:</label>
+                                        <label for="date1Add" class="col-form-label col-sm-4">Departure
+                                            Date:</label>
                                         <div class="col-sm-6">
-                                            <input type="date" th:field="${movement.date1}" class="form-control"
+                                            <input type="date" th:field="${vehicleMovement.date1}"
+                                                   class="form-control"
                                                    id="date1Add" name="date1" readonly>
                                         </div>
                                     </div>
-                                </section>
-                            </div>
-                            <div class="col-lg-6">
-                                <section class="panel">
+                                </div>
+                                <div class="col-lg-6">
                                     <div class="form-group row">
-                                        <label for="ddlLocation2Add" class="col-form-label col-sm-4">Arrived
-                                            at: </label>
+                                        <label class="col-form-label col-sm-4">Arrived At </label>
                                         <div class="col-sm-6">
-                                            <select class="form-control" id="ddlLocation2Add" name="locationid2"
-                                                    readonly>
-                                                <option th:value="${null}">-SELECT-</option>
-                                                <option th:each="location : ${locations}"
-                                                        th:selected="${location.id}==${movement.locationid2}?True:False"
-                                                        th:value="${location.id}"
-                                                        th:text="${location.description}">
-                                                </option>
-                                            </select>
+                                            <input type="text" th:field="${vehicleMovement.location2.details}"
+                                                   class="form-control"
+                                                   name="locationid2" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="date2Add" class="col-form-label col-sm-4">Arrival date:</label>
                                         <div class="col-sm-6">
-                                            <input type="date" th:field="${movement.date2}" class="form-control"
+                                            <input type="date" th:field="${vehicleMovement.date2}"
+                                                   class="form-control"
                                                    id="date2Add" name="date2" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="remarksAdd" class="col-form-label col-sm-4">Remarks:</label>
                                         <div class="col-sm-6">
-                                            <input type="text" th:value="${movement.remarks}" class="form-control"
+                                            <input type="text" th:value="${vehicleMovement.remarks}"
+                                                   class="form-control"
                                                    id="remarksAdd" name="remarks" readonly>
                                         </div>
                                     </div>
-                                </section>
+                                </div>
                             </div>
                         </section>
-                    </div>
-                    <br>
-                    <div class="row white-bg">
-                        <div class="panel-body">
-                            <button class="btn btn-primary" disabled>
-                                Save
-                            </button>
-                            <a href="/fleet/movements" class="btn  btn-warning">
-                                Exit
-                            </a>
-                        </div>
-                    </div>
-                </form>
+                        <section class="panel">
+                            <div class="panel-body">
+                                <a href="/vehicleMovement" class="btn btn-warning">
+                                    Exit
+                                </a>
+                            </div>
+                        </section>
+                    </form>
+                </div>
             </div>
         </div>
     </section>

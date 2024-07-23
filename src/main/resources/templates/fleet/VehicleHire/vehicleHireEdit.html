@@ -3,13 +3,10 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Vehicle Hire Edit</title>
+    <title>Edit this Vehicle Type</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
     <!-- Custom CSS -->
     <style>
         body {
@@ -24,92 +21,79 @@
 
         .panel {
             border: none;
-            box-shadow: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .panel-heading {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            font-size: 1.5rem; /* Increase heading font size */
+            font-weight: 700; /* Make heading font bolder */
         }
 
         .panel-body {
             padding: 10px;
         }
 
-        .breadcrumb a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            color: #0056b3;
-        }
-
-        .btn-new-state {
-            background-color: #007bff;
-            border-color: #007bff;
-            color: #fff; /* Set text color to white for better contrast */
-            font-size: 1.5rem; /* Increase font size */
-            padding: 8px 16px; /* Increase padding for larger button size */
-            border-radius: 30px; /* Make buttons rounded but less oval */
+        .btn {
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
-        .btn-new-state:hover {
-            background-color: #0056b3;
-            border-color: #004494;
-        }
-
-        /* Optional: Add shadow for better visibility */
-        .btn-new-state {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-new-state:hover {
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-group {
-            width: 40px;
-        }
-
-        .table-bordered {
-            border: 2px solid #dee2e6;
-        }
-
-        .table-bordered th,
-        .table-bordered td {
-            border: 2px solid #dee2e6;
-        }
-
-        .table thead th {
-            background-color: #f4f6f9;
-            font-weight: 700;
-            color: #333;
+        .btn-warning {
+            background-color: #ffc107; /* Yellow background color */
+            border-color: #ffc107; /* Yellow border color */
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
 
-        .table th, .table td {
-            width: 16.66%; /* 100% divided by 6 columns */
-            text-align: center; /* Center align text in each cell */
+        .btn-save {
+            background-color: #0741ff; /* Yellow background color */
+            border-color: #ffc107; /* Yellow border color */
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
-        .panel-heading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 50px; /* Adjust height as needed */
-            background-color: #007bff;
-            color: #fff;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 10px 0;
-            border-radius: 5px;
+        .btn-warning:hover {
+            background-color: #ffca2c; /* Darker yellow on hover */
+            border-color: #ffca2c; /* Darker yellow border on hover */
+            color: #333; /* Darker text color on hover */
         }
+
+        .btn-save:hover {
+            background-color: #2009ff; /* Darker yellow on hover */
+            border-color: #ffca2c; /* Darker yellow border on hover */
+            color: #333; /* Darker text color on hover */
+        }
+
+
     </style>
+
 </head>
 <body>
-
 <div layout:fragment="content">
     <section class="wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="page-header"><i class="fa fa fa-bars"></i> Vehicle Hire Edit</h3>
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/fleet">Fleet Home</a></li>
                     <li><i class="fa fa-bars"></i><a href="/vehicleHire">Vehicle Hires List</a></li>
@@ -118,122 +102,120 @@
             </div>
         </div>
         <div class="container" style="width: 70%">
-            <form class="form-horizontal" th:action="@{/'vehicleHire/update/' + ${vehicleHire.id}}" method="post">
-                <div class="row justify-content-center white-bg">
-                    <section class="panel">
-                        <header class="panel-heading">
-                            Editing Hire Record
-                        </header>
-                        <br>
-                        <div class="col-lg-6">
-                            <section class="panel">
-                                <div class="form-group row">
-                                    <label for="ddlVehicleAdd" class="col-sm-4 col-form-label">Vehicle: </label>
-                                    <div class="col-sm-6">
-                                        <select id="ddlVehicleAdd" name="vehicleid" class="form-control">
-                                            <option th:value="${null}">-SELECT-</option>
-                                            <option th:each="vehicle : ${vehicles}"
-                                                    th:selected="${vehicle.id}==${vehicleHire.vehicleid}?True:False"
-                                                    th:value="${vehicle.id}"
-                                                    th:text="${vehicle.name}">
-                                            </option>
-                                        </select>
-                                    </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <form class="form-horizontal" th:action="@{/'vehicleHire/update/' + ${vehicleHire.id}}"
+                          method="post">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Editing Hire Record
+                            </header>
+                            <div class="panel-body">
+                                <div class="col-lg-6">
+                                        <div class="form-group row">
+                                            <label for="ddlVehicleAdd" class="col-sm-4 col-form-label">Vehicle: </label>
+                                            <div class="col-sm-6">
+                                                <select id="ddlVehicleAdd" name="vehicleid" class="form-control">
+                                                    <option th:value="${null}">-SELECT-</option>
+                                                    <option th:each="vehicle : ${vehicles}"
+                                                            th:selected="${vehicle.id}==${vehicleHire.vehicleid}?True:False"
+                                                            th:value="${vehicle.id}"
+                                                            th:text="${vehicle.name}">
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Client: </label>
+                                            <div class="col-sm-6">
+                                                <select name="clientid" class="form-control">
+                                                    <option th:value="${null}">-SELECT-</option>
+                                                    <option th:each="client : ${clients}"
+                                                            th:selected="${client.id}==${vehicleHire.clientid}?True:False"
+                                                            th:value="${client.id}"
+                                                            th:text="${client.name}">
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Date Out: </label>
+                                            <div class="col-sm-6">
+                                                <input type="date" class="form-control"
+                                                       th:field="${vehicleHire.dateOut}"
+                                                       name="dateOut" placeholder="Date Out">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Time Out:</label>
+                                            <div class="col-sm-6">
+                                                <input type="time" class="form-control"
+                                                       th:field="${vehicleHire.timeOut}"
+                                                       name="timeOut" placeholder="Time Out">
+                                            </div>
+                                        </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Client: </label>
-                                    <div class="col-sm-6">
-                                        <select name="clientid" class="form-control">
-                                            <option th:value="${null}">-SELECT-</option>
-                                            <option th:each="client : ${clients}"
-                                                    th:selected="${client.id}==${vehicleHire.clientid}?True:False"
-                                                    th:value="${client.id}"
-                                                    th:text="${client.name}">
-                                            </option>
-                                        </select>
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <label for="ddlLocationAdd"
+                                               class="col-sm-4 col-form-label">Destination: </label>
+                                        <div class="col-sm-6">
+                                            <select id="ddlLocationAdd" name="locationid" class="form-control">
+                                                <option th:value="${null}">-SELECT-</option>
+                                                <option th:each="location : ${locations}"
+                                                        th:selected="${location.id}==${vehicleHire.locationid}?True:False"
+                                                        th:value="${location.id}"
+                                                        th:text="${location.description}">
+                                                </option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Date Out: </label>
-                                    <div class="col-sm-6">
-                                        <input type="date" class="form-control" th:field="${vehicleHire.dateOut}"
-                                               name="dateOut" placeholder="Date Out">
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Date In: </label>
+                                        <div class="col-sm-6">
+                                            <input type="date" class="form-control" th:field="${vehicleHire.dateIn}"
+                                                   name="dateIn"
+                                                   placeholder="Date In">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Time Out:</label>
-                                    <div class="col-sm-6">
-                                        <input type="time" class="form-control" th:field="${vehicleHire.timeOut}"
-                                               name="timeOut" placeholder="Time Out">
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Time In: </label>
+                                        <div class="col-sm-6">
+                                            <input type="time" class="form-control" th:value="${vehicleHire.timeIn}"
+                                                   name="timeIn"
+                                                   placeholder="Time In">
+                                        </div>
                                     </div>
-                                </div>
-                            </section>
-                        </div>
-                        <div class="col-lg-6">
-                            <section class="panel">
-                                <div class="form-group row">
-                                    <label for="ddlLocationAdd" class="col-sm-4 col-form-label">Destination: </label>
-                                    <div class="col-sm-6">
-                                        <select id="ddlLocationAdd" name="locationid" class="form-control">
-                                            <option th:value="${null}">-SELECT-</option>
-                                            <option th:each="location : ${locations}"
-                                                    th:selected="${location.id}==${vehicleHire.locationid}?True:False"
-                                                    th:value="${location.id}"
-                                                    th:text="${location.description}">
-                                            </option>
-                                        </select>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Price: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" th:value="${vehicleHire.price}"
+                                                   name="price"
+                                                   placeholder="Price">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Date In: </label>
-                                    <div class="col-sm-6">
-                                        <input type="date" class="form-control" th:field="${vehicleHire.dateIn}"
-                                               name="dateIn"
-                                               placeholder="Date In">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Time In: </label>
-                                    <div class="col-sm-6">
-                                        <input type="time" class="form-control" th:value="${vehicleHire.timeIn}"
-                                               name="timeIn"
-                                               placeholder="Time In">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Price: </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control" th:value="${vehicleHire.price}"
-                                               name="price"
-                                               placeholder="Price">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Remarks</label>
-                                    <div class="col-sm-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Remarks</label>
+                                        <div class="col-sm-6">
                                         <textarea class="form-control" th:field="${vehicleHire.remarks}" name="remarks"
                                                   placeholder="Remarks" rows="3"></textarea>
+                                        </div>
                                     </div>
                                 </div>
-                            </section>
-                        </div>
-                    </section>
+                            </div>
+                        </section>
+                        <section class="panel">
+                            <div class="panel-body">
+                                <button type="submit" class="btn btn-save">
+                                    Save
+                                </button>
+                                <a href="/vehicleHire" class="btn btn-warning">
+                                    Exit
+                                </a>
+                            </div>
+                        </section>
+                    </form>
                 </div>
-                <br>
-                <div class="row">
-                    <section class="panel">
-                        <div class="panel-body">
-                            <button type="submit" class="btn btn-primary">
-                                Save
-                            </button>
-                            <a href="/vehicleHire" class="btn  btn-warning">
-                                Exit
-                            </a>
-                        </div>
-                    </section>
-                </div>
-            </form>
-        </div>
     </section>
 </div>
 

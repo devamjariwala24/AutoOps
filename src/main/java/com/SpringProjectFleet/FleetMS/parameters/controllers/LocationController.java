@@ -36,6 +36,7 @@ public class LocationController {
 
     @GetMapping("/locations")
     public String findAll(Model model){
+        model.addAttribute("locations", locationService.findAll());
         addModelAttributes(model);
         return "/parameters/Locations/locations";
     }

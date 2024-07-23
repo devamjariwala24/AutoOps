@@ -39,7 +39,6 @@ public class VehicleController {
 
 
     public Model addModelAttributes(Model model){
-        model.addAttribute("vehicles", vehicleService.findAll());
         model.addAttribute("vehicleTypes", vehicleTypeService.findAll());
         model.addAttribute("vehicleModels", vehicleModelService.findAll());
         model.addAttribute("vehicleMakes", vehicleMakeService.findAll());
@@ -52,6 +51,7 @@ public class VehicleController {
     @GetMapping("/vehicles")
     public String findAll(Model model){
         addModelAttributes(model);
+        model.addAttribute("vehicles", vehicleService.findAll());
         return "/fleet/Vehicle/vehicles";
     }
 

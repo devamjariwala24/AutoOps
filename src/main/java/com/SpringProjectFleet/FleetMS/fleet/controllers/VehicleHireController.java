@@ -31,6 +31,7 @@ public class VehicleHireController {
 
     @GetMapping("/vehicleHire")
     public String findAll(Model model){
+        model.addAttribute("vehicleHires", vehicleHireService.findAll());
         addModelAttributes(model);
         return "/fleet/VehicleHire/vehicleHires";
     }
