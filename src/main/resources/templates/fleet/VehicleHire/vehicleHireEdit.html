@@ -2,7 +2,107 @@
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Vehicle Hire Edit</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .wrapper {
+            margin-top: 60px; /* Increase margin-top to create more space from the header */
+        }
+
+        .panel {
+            border: none;
+            box-shadow: none;
+        }
+
+        .panel-body {
+            padding: 10px;
+        }
+
+        .breadcrumb a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #0056b3;
+        }
+
+        .btn-new-state {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff; /* Set text color to white for better contrast */
+            font-size: 1.5rem; /* Increase font size */
+            padding: 8px 16px; /* Increase padding for larger button size */
+            border-radius: 30px; /* Make buttons rounded but less oval */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-new-state:hover {
+            background-color: #0056b3;
+            border-color: #004494;
+        }
+
+        /* Optional: Add shadow for better visibility */
+        .btn-new-state {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-new-state:hover {
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-group {
+            width: 40px;
+        }
+
+        .table-bordered {
+            border: 2px solid #dee2e6;
+        }
+
+        .table-bordered th,
+        .table-bordered td {
+            border: 2px solid #dee2e6;
+        }
+
+        .table thead th {
+            background-color: #f4f6f9;
+            font-weight: 700;
+            color: #333;
+        }
+
+
+        .table th, .table td {
+            width: 16.66%; /* 100% divided by 6 columns */
+            text-align: center; /* Center align text in each cell */
+        }
+
+        .panel-heading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px; /* Adjust height as needed */
+            background-color: #007bff;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
 <body>
 
 <div layout:fragment="content">
@@ -12,13 +112,13 @@
                 <h3 class="page-header"><i class="fa fa fa-bars"></i> Vehicle Hire Edit</h3>
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/fleet">Fleet Home</a></li>
-                    <li><i class="fa fa-bars"></i><a href="/fleet/hires">Vehicle Hires List</a></li>
-                    <li><i class="fa fa-square-o"></i>Vehicle Hire Edit</li>
+                    <li><i class="fa fa-bars"></i><a href="/vehicleHire">Vehicle Hires List</a></li>
+                    <li><i class="fa fa-check-square"></i>Vehicle Hire Edit</li>
                 </ol>
             </div>
         </div>
         <div class="container" style="width: 70%">
-            <form class="form-horizontal" th:action="@{/fleet/hires}" method="post">
+            <form class="form-horizontal" th:action="@{/'vehicleHire/update/' + ${vehicleHire.id}}" method="post">
                 <div class="row justify-content-center white-bg">
                     <section class="panel">
                         <header class="panel-heading">
@@ -27,13 +127,6 @@
                         <br>
                         <div class="col-lg-6">
                             <section class="panel">
-                                <div class="form-group row">
-                                    <label for="idAdd" class="col-sm-4 col-form-label">Id: </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" th:value="${vehicleHire.id}" class="form-control" id="idAdd"
-                                               name="id" placeholder="Id" readonly>
-                                    </div>
-                                </div>
                                 <div class="form-group row">
                                     <label for="ddlVehicleAdd" class="col-sm-4 col-form-label">Vehicle: </label>
                                     <div class="col-sm-6">

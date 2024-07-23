@@ -1,10 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add a New Vehicle Status</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .wrapper {
+            margin-top: 60px; /* Increase margin-top to create more space from the header */
+        }
+
+        .panel {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .panel-heading {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            font-size: 1.5rem; /* Increase heading font size */
+            font-weight: 700; /* Make heading font bolder */
+        }
+
+        .panel-body {
+            padding: 10px;
+        }
+
+        .btn {
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-warning {
+            background-color: #ffc107; /* Yellow background color */
+            border-color: #ffc107; /* Yellow border color */
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+
+        .btn-save {
+            background-color: #0741ff; /* Yellow background color */
+            border-color: #ffc107; /* Yellow border color */
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-warning:hover {
+            background-color: #ffca2c; /* Darker yellow on hover */
+            border-color: #ffca2c; /* Darker yellow border on hover */
+            color: #333; /* Darker text color on hover */
+        }
+
+        .btn-save:hover {
+            background-color: #2009ff; /* Darker yellow on hover */
+            border-color: #ffca2c; /* Darker yellow border on hover */
+            color: #333; /* Darker text color on hover */
+        }
+
+    </style>
+
 </head>
 <body>
-
+<div layout:fragment="content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/fleet">Fleet</a></li>
+                    <li><i class="fa fa-bars"></i><a href="/vehicleStatus">Vehicle Status Page</a></li>
+                    <li><i class="fa fa-square-o"></i>Vehicle Status Add</li>
+                </ol>
+            </div>
+        </div>
+        <div class="container" style="width: 70%">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <form id="cform" class="form-horizontal" th:action="@{'/addNewVehicleStatus'}" method="post">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Add New Vehicle Status Record
+                            </header>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Description</label>
+                                    <div class="col-sm-6">
+                                        <input name="description" type="text" size="16" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Status Remark</label>
+                                    <div class="col-sm-6">
+                                        <input name="details" class="form-control" size="16" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="panel">
+                            <div class="panel-body">
+                                <button type="submit" class="btn btn-save">
+                                    Save
+                                </button>
+                                <a href="/vehicleStatus" class="btn btn-warning">
+                                    Exit
+                                </a>
+                            </div>
+                        </section>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 </body>
 </html>
