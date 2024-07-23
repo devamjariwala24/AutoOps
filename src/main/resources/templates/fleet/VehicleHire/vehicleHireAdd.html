@@ -2,131 +2,213 @@
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
-<body>
+<head>
+    <title>Add a New Vehicle Type</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .wrapper {
+            margin-top: 60px; /* Increase margin-top to create more space from the header */
+        }
+
+        .panel {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .panel-heading {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            font-size: 1.5rem; /* Increase heading font size */
+            font-weight: 700; /* Make heading font bolder */
+        }
+
+        .panel-body {
+            padding: 10px;
+        }
+
+        .btn {
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-warning {
+            background-color: #ffc107; /* Yellow background color */
+            border-color: #ffc107; /* Yellow border color */
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+
+        .btn-save {
+            background-color: #0741ff; /* Yellow background color */
+            border-color: #ffc107; /* Yellow border color */
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-warning:hover {
+            background-color: #ffca2c; /* Darker yellow on hover */
+            border-color: #ffca2c; /* Darker yellow border on hover */
+            color: #333; /* Darker text color on hover */
+        }
+
+        .btn-save:hover {
+            background-color: #2009ff; /* Darker yellow on hover */
+            border-color: #ffca2c; /* Darker yellow border on hover */
+            color: #333; /* Darker text color on hover */
+        }
+
+    </style>
+
+</head>
+<body>
 <div layout:fragment="content">
-  <section class="wrapper">
-    <div class="row">
-      <div class="col-lg-12">
-        <h3 class="page-header"><i class="fa fa fa-bars"></i> Vehicle Hire Add</h3>
-        <ol class="breadcrumb">
-          <li><i class="fa fa-home"></i><a href="/fleet">Fleet Home</a></li>
-          <li><i class="fa fa-bars"></i><a href="/fleet/hires">Hire List</a></li>
-          <li><i class="fa fa-square-o"></i>Vehicle Hire Add</li>
-        </ol>
-      </div>
-    </div>
-    <div class="container" style="width: 70%">
-      <form class="form-horizontal" th:action="@{/fleet/hires}" method="post">
-        <div class="row justify-content-center white-bg">
-          <section class="panel">
-            <header class="panel-heading">
-              New Vehicle Hire Record
-            </header>
-            <br>
-            <div class="col-lg-6">
-              <section class="panel">
-                <div class="form-group row">
-                  <label for="ddlVehicleAdd" class="col-sm-4 col-form-label">Vehicle: </label>
-                  <div class="col-sm-6">
-                    <select id="ddlVehicleAdd" name="vehicleid" class="form-control">
-                      <option th:value="${null}">-SELECT-</option>
-                      <option th:each="vehicle : ${vehicles}"
-                              th:value="${vehicle.id}"
-                              th:text="${vehicle.name}">
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="ddlClientAdd" class="col-sm-4 col-form-label">Client: </label>
-                  <div class="col-sm-6">
-                    <select id="ddlClientAdd" name="clientid" class="form-control">
-                      <option th:value="${null}">-SELECT-</option>
-                      <option th:each="client : ${clients}"
-                              th:value="${client.id}"
-                              th:text="${client.name}">
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="dateOutAdd" class="col-sm-4 col-form-label">Date Out: </label>
-                  <div class="col-sm-6">
-                    <input type="date" class="form-control" id="dateOutAdd" name="dateOut"
-                           placeholder="Date Out">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="timeOutAdd" class="col-sm-4 col-form-label">Time Out:</label>
-                  <div class="col-sm-6">
-                    <input type="time" class="form-control" id="timeOutAdd" name="timeOut"
-                           placeholder="Time Out">
-                  </div>
-                </div>
-              </section>
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/fleet">Fleet Home</a></li>
+                    <li><i class="fa fa-bars"></i><a href="/vehicleHire">Vehicle Hire List</a></li>
+                    <li><i class="fa fa-square-o"></i>Vehicle Hire Add</li>
+                </ol>
             </div>
-            <div class="col-lg-6">
-              <section class="panel">
-                <div class="form-group row">
-                  <label for="ddlLocationAdd" class="col-sm-4 col-form-label">Destination: </label>
-                  <div class="col-sm-6">
-                    <select id="ddlLocationAdd" name="locationid" class="form-control">
-                      <option th:value="${null}">-SELECT-</option>
-                      <option th:each="location : ${locations}"
-                              th:value="${location.id}"
-                              th:text="${location.description}">
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="dateInAdd" class="col-sm-4 col-form-label">Date In: </label>
-                  <div class="col-sm-6">
-                    <input type="date" class="form-control" id="dateInAdd" name="dateIn"
-                           placeholder="Date In">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="timeInAdd" class="col-sm-4 col-form-label">Time In: </label>
-                  <div class="col-sm-6">
-                    <input type="time" class="form-control" id="timeInAdd" name="timeIn"
-                           placeholder="Time In">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="priceAdd" class="col-sm-4 col-form-label">Price: </label>
-                  <div class="col-sm-6">
-                    <input type="text" class="form-control" id="priceAdd" name="price"
-                           placeholder="Price">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="remarksAdd" class="col-sm-4 col-form-label">Remarks</label>
-                  <div class="col-sm-6">
+        </div>
+        <div class="container" style="width: 70%">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <form class="form-horizontal" th:action="@{'/addNewVehicleHire'}" method="post">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Add New Vehicle Hire Record
+                            </header>
+                            <div class="panel-body">
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <label for="ddlVehicleAdd" class="col-sm-4 col-form-label">Vehicle: </label>
+                                        <div class="col-sm-6">
+                                            <select id="ddlVehicleAdd" name="vehicleid" class="form-control">
+                                                <option th:value="${null}">-SELECT-</option>
+                                                <option th:each="vehicle : ${vehicles}"
+                                                        th:value="${vehicle.id}"
+                                                        th:text="${vehicle.name}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="ddlClientAdd" class="col-sm-4 col-form-label">Client </label>
+                                        <div class="col-sm-6">
+                                            <select id="ddlClientAdd" name="clientid" class="form-control">
+                                                <option th:value="${null}">-SELECT-</option>
+                                                <option th:each="client : ${clients}"
+                                                        th:value="${client.id}"
+                                                        th:text="${client.name}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="dateOutAdd" class="col-sm-4 col-form-label">Date Out: </label>
+                                        <div class="col-sm-6">
+                                            <input type="date" class="form-control" id="dateOutAdd" name="dateOut"
+                                                   placeholder="Date Out">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="timeOutAdd" class="col-sm-4 col-form-label">Time Out:</label>
+                                        <div class="col-sm-6">
+                                            <input type="time" class="form-control" id="timeOutAdd" name="timeOut"
+                                                   placeholder="Time Out">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <label for="ddlLocationAdd"
+                                               class="col-sm-4 col-form-label">Destination: </label>
+                                        <div class="col-sm-6">
+                                            <select id="ddlLocationAdd" name="locationid" class="form-control">
+                                                <option th:value="${null}">-SELECT-</option>
+                                                <option th:each="location : ${locations}"
+                                                        th:value="${location.id}"
+                                                        th:text="${location.description}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="dateInAdd" class="col-sm-4 col-form-label">Date In: </label>
+                                        <div class="col-sm-6">
+                                            <input type="date" class="form-control" id="dateInAdd" name="dateIn"
+                                                   placeholder="Date In">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="timeInAdd" class="col-sm-4 col-form-label">Time In: </label>
+                                        <div class="col-sm-6">
+                                            <input type="time" class="form-control" id="timeInAdd" name="timeIn"
+                                                   placeholder="Time In">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="priceAdd" class="col-sm-4 col-form-label">Price: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="priceAdd" name="price"
+                                                   placeholder="Price">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="remarksAdd" class="col-sm-4 col-form-label">Remarks</label>
+                                        <div class="col-sm-6">
                                         <textarea class="form-control" id="remarksAdd" name="remarks"
                                                   placeholder="Remarks" rows="3"></textarea>
-                  </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="panel">
+                            <div class="panel-body">
+                                <button type="submit" class="btn btn-save">
+                                    Save
+                                </button>
+                                <a href="/vehicleHire" class="btn btn-warning">
+                                    Exit
+                                </a>
+                            </div>
+                        </section>
+                    </form>
                 </div>
-              </section>
             </div>
-          </section>
         </div>
-        <br>
-        <div class="row white-bg">
-          <div class="panel-body">
-            <button type="submit" class="btn btn-primary">
-              Save
-            </button>
-            <a href="/fleet/hires" class="btn  btn-warning">
-              Exit
-            </a>
-          </div>
-        </div>
-      </form>
-    </div>
-  </section>
+    </section>
 </div>
-
 </body>
 </html>

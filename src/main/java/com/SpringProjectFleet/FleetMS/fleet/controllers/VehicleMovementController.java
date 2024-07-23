@@ -2,6 +2,8 @@ package com.SpringProjectFleet.FleetMS.fleet.controllers;
 
 import com.SpringProjectFleet.FleetMS.fleet.models.VehicleMovement;
 import com.SpringProjectFleet.FleetMS.fleet.services.VehicleMovementService;
+import com.SpringProjectFleet.FleetMS.fleet.services.VehicleService;
+import com.SpringProjectFleet.FleetMS.parameters.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
@@ -16,9 +18,23 @@ public class VehicleMovementController {
     @Autowired
     private VehicleMovementService vehicleMovementService;
 
+    @Autowired
+    private LocationService locationService;
+
+    @Autowired
+    private VehicleService vehicleService;
+
+    public Model addModelAttributes(Model model){
+        model.addAttribute("locations1", locationService.findAll());
+        model.addAttribute("locations2", locationService.findAll());
+        model.addAttribute("vehicles", vehicleService.findAll());
+        return  model;
+    }
+
     @GetMapping("/vehicleMovement")
     public String findAll(Model model) {
         model.addAttribute("vehicleMovement", vehicleMovementService.findAll());
+        addModelAttributes(model);
         return "/fleet/VehicleMovement/vehicleMovement";
     }
 
@@ -30,7 +46,8 @@ public class VehicleMovementController {
     }
 
     @GetMapping("/addNewVehicleMovementRecord")
-    public String vehicleMovementAddFromVehicleMovementPage() {
+    public String vehicleMovementAddFromVehicleMovementPage(Model model) {
+        addModelAttributes(model);
         return "/fleet/VehicleMovement/vehicleMovementAdd";
     }
 
@@ -50,6 +67,7 @@ public class VehicleMovementController {
     public String editVehicleMovementFromVehiclePage(@PathVariable Integer id, Model model) {
         VehicleMovement vehicleMovement = vehicleMovementService.findById(id);
         model.addAttribute("vehicleMovement", vehicleMovement);
+        addModelAttributes(model);
         return "/fleet/VehicleMovement/vehicleMovementEdit";
     }
 
@@ -63,5 +81,4 @@ public class VehicleMovementController {
     public HiddenHttpMethodFilter hiddenHttpMethodFilterForVehicleMovement() {
         return new HiddenHttpMethodFilter();
     }
-
 }
