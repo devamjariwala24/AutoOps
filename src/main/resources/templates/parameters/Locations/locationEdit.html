@@ -184,7 +184,6 @@
         $(document).ready(function() {
             $('#ddlCountryAdd').change(function() {
                 var selectedCountryId = $(this).val();
-                // console.log("Country changed to:", selectedCountryId);
                 loadStates(selectedCountryId);
             });
 
@@ -193,7 +192,6 @@
 
             function loadInitialStates() {
                 var selectedCountryId = $('#ddlCountryAdd').val();
-                // console.log("Initial country ID:", selectedCountryId);
                 if (selectedCountryId) {
                     loadStates(selectedCountryId, selectedStateId);
                 } else {
@@ -202,14 +200,11 @@
             }
 
             function loadStates(countryId, selectedStateId = null) {
-                // console.log("Loading states for country ID:", countryId);
-                // console.log("Selected state ID:", selectedStateId);
-
                 $.ajax({
                     url: '/parameters/states/' + countryId,
                     method: 'GET',
                     success: function(states) {
-                        // console.log("Received states:", states);
+
 
                         var stateSelect = $('#ddlStateAdd');
                         stateSelect.empty().append('<option>-SELECT-</option>');
@@ -218,10 +213,8 @@
                         states.forEach(function(state) {
                             var selected = (selectedStateId && state.id == selectedStateId) ? 'selected' : '';
                             stateSelect.append('<option value="' + state.id + '" ' + selected + '>' + state.name + '</option>');
-                            // console.log("Added state:", state.name);
                         });
 
-                        // console.log("Final state select options:", stateSelect.html());
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.error("AJAX error:", textStatus, errorThrown);

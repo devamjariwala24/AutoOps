@@ -131,9 +131,10 @@
                                         <div class="col-sm-6">
                                             <select class="form-control" id="ddlLocation1Add" name="locationid1">
                                                 <option th:value="${null}">-SELECT-</option>
-                                                <option th:each="location : ${vehicleMovement.location1}"
-                                                        th:value="${vehicleMovement.location1.id} ==${vehicleMovement.locationid1}?True:False"
-                                                        th:text="${vehicleMovement.location1.description}">
+                                                <option th:each="location : ${locations1}"
+                                                        th:selected="${location.id}==${vehicleMovement.locationid1}?True:False"
+                                                        th:value="${location.id}"
+                                                        th:text="${location.description}">
                                                 </option>
                                             </select>
                                         </div>
@@ -152,10 +153,10 @@
                                         <div class="col-sm-6">
                                             <select class="form-control" id="ddlLocation2Add" name="locationid2">
                                                 <option th:value="${null}">-SELECT-</option>
-                                                <option th:each="location : ${vehicleMovement.location2}"
-                                                        th:selected="${vehicleMovement.location2.id}==${vehicleMovement.locationid2}?True:False"
-                                                        th:value="${vehicleMovement.location2.id}"
-                                                        th:text="${vehicleMovement.location2.description}">
+                                                <option th:each="location : ${locations2}"
+                                                        th:selected="${location.id}==${vehicleMovement.locationid2}?True:False"
+                                                        th:value="${location.id}"
+                                                        th:text="${location.description}">
                                                 </option>
                                             </select>
                                         </div>

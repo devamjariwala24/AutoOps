@@ -34,6 +34,7 @@ public class VehicleMovementController {
     @GetMapping("/vehicleMovement")
     public String findAll(Model model) {
         model.addAttribute("vehicleMovement", vehicleMovementService.findAll());
+        model.addAttribute("locations", locationService.findAll());
         addModelAttributes(model);
         return "/fleet/VehicleMovement/vehicleMovement";
     }
