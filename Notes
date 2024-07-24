@@ -3,7 +3,6 @@ Hibernate is an ORM tool used to create database tables from java classes.
 In Java Persistence API (JPA), both @Entity and @MappedSuperclass are annotations used to define classes that are part
 of the object-relational mapping (ORM). However, they serve different purposes and have distinct characteristics.
 
-
 @Entity
 Definition:
 
@@ -45,7 +44,7 @@ attributes and methods among multiple entity classes without repeating the code.
 when submitting a form, use <form> tag.
 
 
-Understand the javascript coed used in clientEdit and supplierEdit files.
+Understand the javascript code used in clientEdit and supplierEdit files.
 
 When performing unit test, you have to use the following auto configuration:
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -60,3 +59,49 @@ When you specify replace = AutoConfigureTestDatabase.Replace.NONE, you are telli
 configured data source. Instead, it uses the actual database configuration from your main application.
 This includes using the database URL, username, and password configured in your application.properties
 or application.yml.
+
+
+When solving fleet module, a lot of errors popped up. Majority of them had the following convention:
+addModelAttribute(...). Inside this, you should only add those attributes which you want to import from outside the scope.
+For eg. when you are working inside vehicleMovement, then you need some attributes like location, supplier, which you will
+import from outside. Hence you will add these attributes in addModelAttribute method so they get carried with all the
+methods like add, edit and detail.
+You will not write the attribute vehicleMovement inside the addModelAttribute method as and when you will use
+model.addAttribute("vehicleMovement", vehicleMovementService.findAll()),  in different methods like add, edit and detail,
+along with addModelAttribute, it will be overwritten and records will not be saved properly in the database.
+
+Also, in vehicleMaintenance module, the fields supplier and vehicles are immutable as defined in the model.
+Now when editing the vehicleMaintenance record, dont submit these fields as they will create anomalies and both fields
+will become null in database. The simple solution to this is as follows:
+
+<div class="form-group row">
+    <label for="vehicleName" class="col-form-label col-sm-4">Vehicle: </label>
+    <div class="col-sm-6">
+        <input type="text" th:value="${vehicleMaintenance.vehicle.name}" class="form-control" id="vehicleName" readonly>
+        <input type="hidden" th:field="${vehicleMaintenance.vehicleid}">
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="supplier" class="col-form-label col-sm-4">Supplier: </label>
+    <div class="col-sm-6">
+        <input type="text" th:value="${vehicleMaintenance.supplier.name}" class="form-control" id="supplier" readonly>
+        <input type="hidden" th:field="${vehicleMaintenance.supplierid}">
+    </div>
+</div>
+
+By doing this, his way, the actual entity references are not submitted, but the IDs needed to associate the correct
+Vehicle and Supplier are included in the form submission.
+
+Hidden Input Fields:
+
+These hidden fields contain the vehicleid and supplierid, which are necessary to maintain the association with the
+corresponding entities in the database. The th:field attribute binds these fields to the vehicleid and supplierid
+properties of the VehicleMaintenance object.
+
+
+Place logback.xml file in src/main/resources to suppress the warnings. I had not placed them in the correct path and
+hence the warnings still continued to flash.
+After i placed the
+" logging.level.org.hibernate.persister.entity.AbstractEntityPersister=ERROR " in application.properties, the warnings
+ were suppressed.
