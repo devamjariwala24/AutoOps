@@ -11,9 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Controller
 public class VehicleMaintenanceController {
@@ -30,46 +27,42 @@ public class VehicleMaintenanceController {
     public Model addModelAttributes(Model model){
         model.addAttribute("vehicles", vehicleService.findAll());
         model.addAttribute("suppliers", supplierService.findAll());
-        model.addAttribute("vehicleMaintenance", vehicleMaintenanceService.findAll());
-        return model;
+        return  model;
     }
 
     @GetMapping("/vehicleMaintenance")
     public String findAll(Model model){
-        List<VehicleMaintenance> vehicleMaintenanceList = new ArrayList<>();
-        // Populate the list with data
-        model.addAttribute("vehicleMaintenanceList", vehicleMaintenanceList);
+        model.addAttribute("vehicleMaintenance", vehicleMaintenanceService.findAll());
         addModelAttributes(model);
         return "/fleet/VehicleMaintenance/vehicleMaintenance";
     }
-
+//
     @GetMapping("/vehicleMaintenanceDetails{id}")
     public String detailVehicleMaintenance(@PathVariable Integer id, Model model){
         VehicleMaintenance vehicleMaintenance = vehicleMaintenanceService.findById(id);
         model.addAttribute("vehicleMaintenance",vehicleMaintenance);
-        addModelAttributes(model);
         return "/fleet/VehicleMaintenance/vehicleMaintenanceDetails";
     }
-
+//
     @GetMapping("/addNewVehicleMaintenanceRecord")
     public String vehicleMaintenanceAddFromVehicleMaintenancePage(Model model){
+//        model.addAttribute("vehicleMaintenance", vehicleMaintenanceService.findAll());
         addModelAttributes(model);
         return "/fleet/VehicleMaintenance/vehicleMaintenanceAdd";
     }
 
     @PostMapping(value="/addNewVehicleMaintenance")
-    public String addNewVehicleHireRecordFromVehicleHireAddPage(VehicleMaintenance vehicleMaintenance, Model model) {
+    public String addNewVehicleMaintenanceRecordFromVehicleMaintenanceAddPage(VehicleMaintenance vehicleMaintenance) {
         vehicleMaintenanceService.save(vehicleMaintenance);
-        addModelAttributes(model);
         return "redirect:/vehicleMaintenance";
     }
-
+//
     @DeleteMapping(value="/vehicleMaintenance/delete/{id}")
     public String deleteFromVehicleMaintenancePage(@PathVariable Integer id) {
         vehicleMaintenanceService.delete(id);
         return "redirect:/vehicleMaintenance";
     }
-
+//
     @GetMapping("/vehicleMaintenanceEdit{id}")
     public String editVehicleMaintenanceFromVehicleMaintenancePage(@PathVariable Integer id, Model model){
         VehicleMaintenance vehicleMaintenance = vehicleMaintenanceService.findById(id);
@@ -83,7 +76,6 @@ public class VehicleMaintenanceController {
         vehicleMaintenanceService.save(vehicleMaintenance);
         return "redirect:/vehicleMaintenance";
     }
-
 
     @Bean
     public HiddenHttpMethodFilter hiddenHttpMethodFilterForVehicleMaintenance() {

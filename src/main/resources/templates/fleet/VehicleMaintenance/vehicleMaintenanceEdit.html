@@ -2,14 +2,98 @@
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
+<head>
+    <title>Edit this Vehicle Maintenance</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .wrapper {
+            margin-top: 60px; /* Increase margin-top to create more space from the header */
+        }
+
+        .panel {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .panel-heading {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            font-size: 1.5rem; /* Increase heading font size */
+            font-weight: 700; /* Make heading font bolder */
+        }
+
+        .panel-body {
+            padding: 10px;
+        }
+
+        .btn {
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-warning {
+            background-color: #ffc107; /* Yellow background color */
+            border-color: #ffc107; /* Yellow border color */
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+
+        .btn-save {
+            background-color: #0741ff; /* Yellow background color */
+            border-color: #ffc107; /* Yellow border color */
+            color: #fff; /* Darker text color for better contrast */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            padding: 14px 36px; /* Padding around text */
+            border-radius: 30px; /* Rounded corners */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-warning:hover {
+            background-color: #ffca2c; /* Darker yellow on hover */
+            border-color: #ffca2c; /* Darker yellow border on hover */
+            color: #333; /* Darker text color on hover */
+        }
+
+        .btn-save:hover {
+            background-color: #2009ff; /* Darker yellow on hover */
+            border-color: #ffca2c; /* Darker yellow border on hover */
+            color: #333; /* Darker text color on hover */
+        }
+
+
+    </style>
+
+</head>
 <body>
-
 <div layout:fragment="content">
     <section class="wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="page-header"><i class="fa fa fa-bars"></i> Vehicle Maintenance Edit</h3>
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/fleet">Fleet Home</a></li>
                     <li><i class="fa fa-bars"></i><a href="/fleet/maintenances">Vehicle Maintenance List</a></li>
@@ -18,98 +102,83 @@
             </div>
         </div>
         <div class="container" style="width: 70%">
-            <form class="form-horizontal" th:action="@{/fleet/maintenances}" method="post">
-                <div class="row justify-content-center white-bg">
-                    <section class="panel">
-                        <header class="panel-heading">
-                            Editing Maintenance Record
-                        </header>
-                        <br>
-                        <div class="col-lg-6">
-                            <section class="panel">
-                                <div class="form-group row">
-                                    <label for="idAdd" class="col-sm-4 col-form-label">Id:</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" th:value="${maintenance.id}" class="form-control" id="idAdd"
-                                               name="id" readonly>
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <form class="form-horizontal"
+                          th:action="@{'/vehicleMaintenance/update/' + ${vehicleMaintenance.id}}"
+                          method="post">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Editing Maintenance Record
+                            </header>
+                            <div class="panel-body">
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <label for="vehicleName" class="col-form-label col-sm-4">Vehicle: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" th:field="${vehicleMaintenance.vehicle.name}"
+                                                   class="form-control" id="vehicleName"
+                                                   name="vehicleid" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="startDate" class="col-form-label col-sm-4">Start Date</label>
+                                        <div class="col-sm-6">
+                                            <input type="date" th:field="${vehicleMaintenance.startDate}"
+                                                   class="form-control" id="startDate"
+                                                   name="startDate">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="endDate" class="col-form-label col-sm-4">End Date:</label>
+                                        <div class="col-sm-6">
+                                            <input type="date" th:field="${vehicleMaintenance.endDate}"
+                                                   class="form-control" id="endDate"
+                                                   name="endDate">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-sm-4">Vehicle: </label>
-                                    <div class="col-sm-6">
-                                        <select class="form-control" name="vehicleid">
-                                            <option th:value="${null}">-SELECT-</option>
-                                            <option th:each="vehicle : ${vehicles}"
-                                                    th:selected="${vehicle.id} == ${maintenance.vehicleid}?True:False"
-                                                    th:value="${vehicle.id}"
-                                                    th:text="${vehicle.name}">
-                                            </option>
-                                        </select>
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <label for="supplier" class="col-form-label col-sm-4">Supplier: </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" th:field="${vehicleMaintenance.supplier.name}"
+                                                   class="form-control" id="supplier"
+                                                   name="supplierid" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="remarksAdd" class="col-form-label col-sm-4">Remarks:</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" th:value="${vehicleMaintenance.remarks}"
+                                                   class="form-control"
+                                                   id="remarksAdd" name="remarks">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="price" class="col-form-label col-sm-4">Price:</label>
+                                        <div class="col-sm-6">
+                                            <input id="price" type="text" th:value="${vehicleMaintenance.price}"
+                                                   class="form-control"
+                                                   name="price">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-sm-4">Start Date:</label>
-                                    <div class="col-sm-6">
-                                        <input type="date" th:field="${maintenance.startDate}" class="form-control"
-                                               name="startDate">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-sm-4">End Date:</label>
-                                    <div class="col-sm-6">
-                                        <input type="date" th:field="${maintenance.endDate}" class="form-control"
-                                               name="endDate">
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                        <div class="col-lg-6">
-                            <section class="panel">
-                                <div class="form-group row">
-                                    <label class="col-form-label col-sm-4">Supplier: </label>
-                                    <div class="col-sm-6">
-                                        <select class="form-control" id="ddlSupplierAdd" name="supplierid">
-                                            <option th:value="${null}">-SELECT-</option>
-                                            <option th:each="supplier : ${suppliers}"
-                                                    th:selected="${supplier.id} == ${maintenance.supplierid}?True:False"
-                                                    th:value="${supplier.id}"
-                                                    th:text="${supplier.name}">
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="remarksAdd" class="col-form-label col-sm-4">Remarks:</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" th:value="${maintenance.remarks}" class="form-control"
-                                               id="remarksAdd" name="remarks">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-sm-4">Price:</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" th:value="${maintenance.price}" class="form-control"
-                                               name="price">
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    </section>
+                            </div>
+                        </section>
+                        <section class="panel">
+                            <div class="panel-body">
+                                <button type="submit" class="btn btn-primary">
+                                    Save
+                                </button>
+                                <a href="/vehicleMaintenance" class="btn  btn-warning">
+                                    Exit
+                                </a>
+                            </div>
+                        </section>
+                    </form>
                 </div>
-                <br>
-                <div class="row">
-                    <section class="panel">
-                        <div class="panel-body">
-                            <button type="submit" class="btn btn-primary">
-                                Save
-                            </button>
-                            <a href="/fleet/maintenances" class="btn  btn-warning">
-                                Exit
-                            </a>
-                        </div>
-                    </section>
-                </div>
-            </form>
+            </div>
         </div>
     </section>
 </div>

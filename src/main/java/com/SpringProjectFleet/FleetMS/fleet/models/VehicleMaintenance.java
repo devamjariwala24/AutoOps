@@ -6,12 +6,8 @@ import com.SpringProjectFleet.FleetMS.parameters.models.Supplier;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-
-
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
