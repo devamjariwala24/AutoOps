@@ -43,10 +43,9 @@ public class VehicleMaintenanceController {
         model.addAttribute("vehicleMaintenance",vehicleMaintenance);
         return "/fleet/VehicleMaintenance/vehicleMaintenanceDetails";
     }
-//
+
     @GetMapping("/addNewVehicleMaintenanceRecord")
     public String vehicleMaintenanceAddFromVehicleMaintenancePage(Model model){
-//        model.addAttribute("vehicleMaintenance", vehicleMaintenanceService.findAll());
         addModelAttributes(model);
         return "/fleet/VehicleMaintenance/vehicleMaintenanceAdd";
     }

@@ -78,7 +78,6 @@ public class VehicleHireController {
         return "redirect:/vehicleHire";
     }
 
-
     @Bean
     public HiddenHttpMethodFilter hiddenHttpMethodFilterForVehicleHire() {
         return new HiddenHttpMethodFilter();
